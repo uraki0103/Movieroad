@@ -278,3 +278,9 @@ SNS等でチケットやフライヤー、入場者プレゼントの写真を�
   MVPリリース時点で外部APIを使用予定であり、仕様の把握、認証、データ整合性の面でミスがないように連携していく必要がある。
 2. フロントエンドの選定  
   今回JavaScriptやReactを選定していないが、道を意識したUIづくりにおいてより有用な可能性がある。本リリース後に改めてキャッチアップを行い、現時点の自分にとって技術的に可能か検討していく。
+
+---
+
+### 画面遷移図
+
+figma: <https://www.figma.com/design/13SDiMk9r3WrFMpYgLObch/Movieroad%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=51-258&t=NnqxKv9LGEtweXbX-0>
