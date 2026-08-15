@@ -284,3 +284,9 @@ SNS等でチケットやフライヤー、入場者プレゼントの写真を�
 ### 画面遷移図
 
 figma: <https://www.figma.com/design/13SDiMk9r3WrFMpYgLObch/Movieroad%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=51-258&t=NnqxKv9LGEtweXbX-0>
+
+---
+
+### ER図
+
+miro: <https://miro.com/app/board/uXjVHyI_eUw=/>
