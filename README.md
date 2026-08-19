@@ -220,7 +220,7 @@ SNS等でチケットやフライヤー、入場者プレゼントの写真を�
 
 ### 10-1. 使用予定の技術
 
-- フレームワーク: Ruby + Rails 7.2.x 
+- フレームワーク: Ruby + Rails 8.1.3.1
 - DB: PostgreSQL 18 
 - 認証: Devise 
 - フロントエンド: Hotwire(Turbo) 
