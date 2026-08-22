@@ -5,7 +5,7 @@
     "simplecov_version": "1.1.1",
     "command_name": "RSpec",
     "project_name": "App",
-    "timestamp": "2026-08-19T12:56:12.366+00:00",
+    "timestamp": "2026-08-22T07:54:34.715+00:00",
     "root": "/app",
     "commit": null,
     "primary_coverage": "line",
@@ -16,9 +16,9 @@
   "total": {
     "lines": {
       "covered": 0,
-      "missed": 13,
-      "omitted": 15,
-      "total": 13,
+      "missed": 17,
+      "omitted": 21,
+      "total": 17,
       "percent": 0.0,
       "strength": 0.0
     }
@@ -73,6 +73,25 @@
         0,
         null,
         0,
+        null
+      ],
+      "lines_covered_percent": 0.0,
+      "covered_lines": 0,
+      "missed_lines": 2,
+      "omitted_lines": 2,
+      "total_lines": 2
+    },
+    "app/controllers/top_controller.rb": {
+      "source": [
+        "class TopController < ApplicationController",
+        "  def index",
+        "  end",
+        "end"
+      ],
+      "lines": [
+        0,
+        0,
+        null,
         null
       ],
       "lines_covered_percent": 0.0,
@@ -156,20 +175,44 @@
       "missed_lines": 2,
       "omitted_lines": 1,
       "total_lines": 2
+    },
+    "app/models/user.rb": {
+      "source": [
+        "class User < ApplicationRecord",
+        "  # Include default devise modules. Others available are:",
+        "  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable",
+        "  devise :database_authenticatable, :registerable,",
+        "         :recoverable, :rememberable, :validatable",
+        "end"
+      ],
+      "lines": [
+        0,
+        null,
+        null,
+        0,
+        null,
+        null
+      ],
+      "lines_covered_percent": 0.0,
+      "covered_lines": 0,
+      "missed_lines": 2,
+      "omitted_lines": 4,
+      "total_lines": 2
     }
   },
   "groups": {
     "Controllers": {
       "lines": {
         "covered": 0,
-        "missed": 2,
-        "omitted": 2,
-        "total": 2,
+        "missed": 4,
+        "omitted": 4,
+        "total": 4,
         "percent": 0.0,
         "strength": 0.0
       },
       "files": [
-        "app/controllers/application_controller.rb"
+        "app/controllers/application_controller.rb",
+        "app/controllers/top_controller.rb"
       ]
     },
     "Channels": {
@@ -189,14 +232,15 @@
     "Models": {
       "lines": {
         "covered": 0,
-        "missed": 2,
-        "omitted": 1,
-        "total": 2,
+        "missed": 4,
+        "omitted": 5,
+        "total": 4,
         "percent": 0.0,
         "strength": 0.0
       },
       "files": [
-        "app/models/application_record.rb"
+        "app/models/application_record.rb",
+        "app/models/user.rb"
       ]
     },
     "Mailers": {
