@@ -48,6 +48,8 @@ group :development, :test do
   gem "rspec-rails"
   gem "factory_bot_rails"
   gem "devise"
+  gem "rails-i18n", "~> 8.1"
+  gem "devise-i18n"
 end
 
 group :development do
