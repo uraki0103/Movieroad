@@ -1,0 +1,37 @@
+<div class="max-w-md md:max-w-lg lg:max-w-2xl mx-auto mt-10 md:mt-16 bg-white border border-stone-200 rounded-lg p-8 md:p-10">
+  <h2 class="text-2xl font-semibold text-stone-900 mb-6 text-center">新規登録</h2>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :post }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+   <div class="mb-4">
+      <%= f.label :name, "ユーザー名", class: "block text-sm text-stone-600 mb-1" %>
+      <%= f.text_field :name, autofocus: true,
+          class: "w-full border border-stone-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-900" %>
+    </div>
+  
+    <div class="mb-4">
+      <%= f.label :email, "メールアドレス", class: "block text-sm text-stone-600 mb-1" %>
+      <%= f.email_field :email, autocomplete: "email",
+          class: "w-full border border-stone-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-900" %>
+    </div>
+
+    <div class="mb-4">
+      <p><%= f.label :password, "パスワード" , class: "block text-sm text-stone-600 mb-1" %></p>
+      <p><%= f.password_field :password, autocomplete: "new-password", class: "w-full border border-stone-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-900" %></p>
+    </div>
+
+    <div class="mb-4">
+      <p><%= f.label :password_confirmation, "パスワード再入力", class: "block text-sm text-stone-600 mb-1" %></p>
+      <p><%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-full border border-stone-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-900" %></p>
+    </div>
+
+    <div class-"mb-4">
+      <%= f.submit "登録する", class: "w-full bg-amber-900 text-white py-2 rounded-md font-medium hover:bg-amber-800 transition-colors cursor-pointer" %>
+    </div>
+    <% end %>
+
+  <div class="mt-6 text-center text-sm">
+    <%= render "devise/shared/links" %>
+  </div>
+</div>
