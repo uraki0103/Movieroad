@@ -50,6 +50,8 @@ group :development, :test do
   gem "devise"
   gem "rails-i18n", "~> 8.1"
   gem "devise-i18n"
+  gem "capybara"
+  gem "selenium-webdriver"
 end
 
 group :development do
