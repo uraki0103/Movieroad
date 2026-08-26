@@ -5,7 +5,7 @@
     "simplecov_version": "1.1.1",
     "command_name": "RSpec",
     "project_name": "App",
-    "timestamp": "2026-08-25T13:01:50.304+00:00",
+    "timestamp": "2026-08-26T09:00:20.276+00:00",
     "root": "/app",
     "commit": null,
     "primary_coverage": "line",
@@ -15,12 +15,12 @@
   },
   "total": {
     "lines": {
-      "covered": 7,
-      "missed": 25,
+      "covered": 20,
+      "missed": 12,
       "omitted": 32,
       "total": 32,
-      "percent": 21.875,
-      "strength": 0.21875
+      "percent": 62.5,
+      "strength": 0.65625
     }
   },
   "coverage": {
@@ -86,30 +86,30 @@
         "end"
       ],
       "lines": [
-        0,
+        1,
         null,
-        0,
-        0,
+        1,
+        1,
         null,
-        0,
+        1,
         null,
-        0,
-        0,
-        0,
-        null,
-        null,
+        1,
         0,
         0,
         null,
         null,
+        1,
         0,
+        null,
+        null,
+        1,
         0,
         null,
         null
       ],
-      "lines_covered_percent": 0.0,
-      "covered_lines": 0,
-      "missed_lines": 11,
+      "lines_covered_percent": 63.63636363636363,
+      "covered_lines": 7,
+      "missed_lines": 4,
       "omitted_lines": 9,
       "total_lines": 11
     },
@@ -123,16 +123,16 @@
         "end"
       ],
       "lines": [
-        0,
-        0,
+        1,
+        1,
         null,
-        0,
+        1,
         null,
         null
       ],
-      "lines_covered_percent": 0.0,
-      "covered_lines": 0,
-      "missed_lines": 3,
+      "lines_covered_percent": 100.0,
+      "covered_lines": 3,
+      "missed_lines": 0,
       "omitted_lines": 3,
       "total_lines": 3
     },
@@ -145,15 +145,15 @@
         "end"
       ],
       "lines": [
-        0,
-        0,
-        0,
+        1,
+        1,
+        2,
         null,
         null
       ],
-      "lines_covered_percent": 0.0,
-      "covered_lines": 0,
-      "missed_lines": 3,
+      "lines_covered_percent": 100.0,
+      "covered_lines": 3,
+      "missed_lines": 0,
       "omitted_lines": 2,
       "total_lines": 3
     },
@@ -277,12 +277,12 @@
   "groups": {
     "Controllers": {
       "lines": {
-        "covered": 0,
-        "missed": 17,
+        "covered": 13,
+        "missed": 4,
         "omitted": 14,
         "total": 17,
-        "percent": 0.0,
-        "strength": 0.0
+        "percent": 76.47058823529412,
+        "strength": 0.8235294117647058
       },
       "files": [
         "app/controllers/application_controller.rb",
