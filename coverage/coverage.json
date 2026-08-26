@@ -5,7 +5,7 @@
     "simplecov_version": "1.1.1",
     "command_name": "RSpec",
     "project_name": "App",
-    "timestamp": "2026-08-19T12:56:12.366+00:00",
+    "timestamp": "2026-08-26T09:00:20.276+00:00",
     "root": "/app",
     "commit": null,
     "primary_coverage": "line",
@@ -15,12 +15,12 @@
   },
   "total": {
     "lines": {
-      "covered": 0,
-      "missed": 13,
-      "omitted": 15,
-      "total": 13,
-      "percent": 0.0,
-      "strength": 0.0
+      "covered": 20,
+      "missed": 12,
+      "omitted": 32,
+      "total": 32,
+      "percent": 62.5,
+      "strength": 0.65625
     }
   },
   "coverage": {
@@ -67,19 +67,95 @@
         "class ApplicationController < ActionController::Base",
         "  # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.",
         "  allow_browser versions: :modern",
+        "  before_action :configure_permitted_parameters, if: :devise_controller?",
+        "",
+        "  protected",
+        "",
+        "  def configure_permitted_parameters",
+        "    devise_parameter_sanitizer.permit(:sign_up, keys: [ :name ])",
+        "    devise_parameter_sanitizer.permit(:account_update, keys: [ :name ])",
+        "  end",
+        "",
+        "  def after_sign_up_path_for(resource)",
+        "    records_path",
+        "  end",
+        "",
+        "  def after_sign_in_path_for(resource)",
+        "    records_path",
+        "  end",
         "end"
       ],
       "lines": [
+        1,
+        null,
+        1,
+        1,
+        null,
+        1,
+        null,
+        1,
+        0,
         0,
         null,
+        null,
+        1,
         0,
+        null,
+        null,
+        1,
+        0,
+        null,
         null
       ],
-      "lines_covered_percent": 0.0,
-      "covered_lines": 0,
-      "missed_lines": 2,
+      "lines_covered_percent": 63.63636363636363,
+      "covered_lines": 7,
+      "missed_lines": 4,
+      "omitted_lines": 9,
+      "total_lines": 11
+    },
+    "app/controllers/records_controller.rb": {
+      "source": [
+        "class RecordsController < ApplicationController",
+        "  before_action :authenticate_user!",
+        "",
+        "  def index",
+        "  end",
+        "end"
+      ],
+      "lines": [
+        1,
+        1,
+        null,
+        1,
+        null,
+        null
+      ],
+      "lines_covered_percent": 100.0,
+      "covered_lines": 3,
+      "missed_lines": 0,
+      "omitted_lines": 3,
+      "total_lines": 3
+    },
+    "app/controllers/top_controller.rb": {
+      "source": [
+        "class TopController < ApplicationController",
+        "  def index",
+        "    redirect_to records_path if user_signed_in?",
+        "  end",
+        "end"
+      ],
+      "lines": [
+        1,
+        1,
+        2,
+        null,
+        null
+      ],
+      "lines_covered_percent": 100.0,
+      "covered_lines": 3,
+      "missed_lines": 0,
       "omitted_lines": 2,
-      "total_lines": 2
+      "total_lines": 3
     },
     "app/helpers/application_helper.rb": {
       "source": [
@@ -87,12 +163,27 @@
         "end"
       ],
       "lines": [
-        0,
+        1,
         null
       ],
-      "lines_covered_percent": 0.0,
-      "covered_lines": 0,
-      "missed_lines": 1,
+      "lines_covered_percent": 100.0,
+      "covered_lines": 1,
+      "missed_lines": 0,
+      "omitted_lines": 1,
+      "total_lines": 1
+    },
+    "app/helpers/records_helper.rb": {
+      "source": [
+        "module RecordsHelper",
+        "end"
+      ],
+      "lines": [
+        1,
+        null
+      ],
+      "lines_covered_percent": 100.0,
+      "covered_lines": 1,
+      "missed_lines": 0,
       "omitted_lines": 1,
       "total_lines": 1
     },
@@ -147,29 +238,56 @@
         "end"
       ],
       "lines": [
-        0,
-        0,
+        1,
+        1,
         null
       ],
-      "lines_covered_percent": 0.0,
-      "covered_lines": 0,
-      "missed_lines": 2,
+      "lines_covered_percent": 100.0,
+      "covered_lines": 2,
+      "missed_lines": 0,
       "omitted_lines": 1,
       "total_lines": 2
+    },
+    "app/models/user.rb": {
+      "source": [
+        "class User < ApplicationRecord",
+        "  # Include default devise modules. Others available are:",
+        "  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable",
+        "  devise :database_authenticatable, :registerable,",
+        "         :recoverable, :rememberable, :validatable",
+        "  validates :name, presence: true, length: { maximum: 30 }",
+        "end"
+      ],
+      "lines": [
+        1,
+        null,
+        null,
+        1,
+        null,
+        1,
+        null
+      ],
+      "lines_covered_percent": 100.0,
+      "covered_lines": 3,
+      "missed_lines": 0,
+      "omitted_lines": 4,
+      "total_lines": 3
     }
   },
   "groups": {
     "Controllers": {
       "lines": {
-        "covered": 0,
-        "missed": 2,
-        "omitted": 2,
-        "total": 2,
-        "percent": 0.0,
-        "strength": 0.0
+        "covered": 13,
+        "missed": 4,
+        "omitted": 14,
+        "total": 17,
+        "percent": 76.47058823529412,
+        "strength": 0.8235294117647058
       },
       "files": [
-        "app/controllers/application_controller.rb"
+        "app/controllers/application_controller.rb",
+        "app/controllers/records_controller.rb",
+        "app/controllers/top_controller.rb"
       ]
     },
     "Channels": {
@@ -188,15 +306,16 @@
     },
     "Models": {
       "lines": {
-        "covered": 0,
-        "missed": 2,
-        "omitted": 1,
-        "total": 2,
-        "percent": 0.0,
-        "strength": 0.0
+        "covered": 5,
+        "missed": 0,
+        "omitted": 5,
+        "total": 5,
+        "percent": 100.0,
+        "strength": 1.0
       },
       "files": [
-        "app/models/application_record.rb"
+        "app/models/application_record.rb",
+        "app/models/user.rb"
       ]
     },
     "Mailers": {
@@ -214,15 +333,16 @@
     },
     "Helpers": {
       "lines": {
-        "covered": 0,
-        "missed": 1,
-        "omitted": 1,
-        "total": 1,
-        "percent": 0.0,
-        "strength": 0.0
+        "covered": 2,
+        "missed": 0,
+        "omitted": 2,
+        "total": 2,
+        "percent": 100.0,
+        "strength": 1.0
       },
       "files": [
-        "app/helpers/application_helper.rb"
+        "app/helpers/application_helper.rb",
+        "app/helpers/records_helper.rb"
       ]
     },
     "Jobs": {

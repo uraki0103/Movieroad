@@ -20,6 +20,12 @@
 
   <body>
     <%= render "shared/header" %>
+    <% if notice %>
+      <p class="bg-amber-50 text-amber-900 text-sm text-center py-2"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="bg-red-50 text-red-900 text-sm text-center py-2"><%= alert %></p>
+    <% end %>
     <main class="container mx-auto mt-20 px-3 bg-stone-50 text-stone-900">     
       <%= yield %>
     </main>
