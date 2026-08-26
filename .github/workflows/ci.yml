@@ -85,6 +85,8 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y libpq-dev libvips
       - name: Set up database
         run: bin/rails db:create db:schema:load
+      - name: Build Tailwind CSS
+        run: bin/rails tailwindcss:build
       - name: Run tests
         run: bundle exec rspec
       - name: Upload coverage report
