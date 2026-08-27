@@ -10,9 +10,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_22_075434) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_26_131005) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "companions", force: :cascade do |t|
+    t.string "companion_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_companions_on_user_id"
+  end
+
+  create_table "movies", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "poster_url"
+    t.integer "release_year"
+    t.string "title", null: false
+    t.integer "tmdb_id"
+    t.datetime "updated_at", null: false
+    t.index ["tmdb_id"], name: "index_movies_on_tmdb_id", unique: true
+  end
+
+  create_table "record_companions", force: :cascade do |t|
+    t.bigint "companion_id", null: false
+    t.datetime "created_at", null: false
+    t.bigint "record_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["companion_id"], name: "index_record_companions_on_companion_id"
+    t.index ["record_id", "companion_id"], name: "index_record_companions_on_record_id_and_companion_id", unique: true
+    t.index ["record_id"], name: "index_record_companions_on_record_id"
+  end
+
+  create_table "records", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "impression"
+    t.text "memory_note"
+    t.bigint "movie_id"
+    t.decimal "rating", precision: 3, scale: 1, null: false
+    t.bigint "theater_id"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.datetime "watched_day", null: false
+    t.index ["movie_id"], name: "index_records_on_movie_id"
+    t.index ["theater_id"], name: "index_records_on_theater_id"
+    t.index ["user_id"], name: "index_records_on_user_id"
+  end
+
+  create_table "theaters", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "theater_name", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_theaters_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -26,4 +77,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_22_075434) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "companions", "users"
+  add_foreign_key "record_companions", "companions"
+  add_foreign_key "record_companions", "records"
+  add_foreign_key "records", "movies"
+  add_foreign_key "records", "theaters"
+  add_foreign_key "records", "users"
+  add_foreign_key "theaters", "users"
 end
