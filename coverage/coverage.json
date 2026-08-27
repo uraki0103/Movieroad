@@ -5,7 +5,7 @@
     "simplecov_version": "1.1.1",
     "command_name": "RSpec",
     "project_name": "App",
-    "timestamp": "2026-08-26T13:29:58.982+00:00",
+    "timestamp": "2026-08-27T05:50:49.452+00:00",
     "root": "/app",
     "commit": null,
     "primary_coverage": "line",
@@ -15,12 +15,12 @@
   },
   "total": {
     "lines": {
-      "covered": 0,
-      "missed": 58,
-      "omitted": 43,
-      "total": 58,
-      "percent": 0.0,
-      "strength": 0.0
+      "covered": 53,
+      "missed": 9,
+      "omitted": 44,
+      "total": 62,
+      "percent": 85.48387096774194,
+      "strength": 1.2580645161290323
     }
   },
   "coverage": {
@@ -86,30 +86,30 @@
         "end"
       ],
       "lines": [
-        0,
+        1,
         null,
-        0,
-        0,
+        1,
+        1,
         null,
-        0,
+        1,
         null,
-        0,
-        0,
-        0,
-        null,
-        null,
-        0,
-        0,
+        1,
+        12,
+        12,
         null,
         null,
+        1,
         0,
-        0,
+        null,
+        null,
+        1,
+        2,
         null,
         null
       ],
-      "lines_covered_percent": 0.0,
-      "covered_lines": 0,
-      "missed_lines": 11,
+      "lines_covered_percent": 90.9090909090909,
+      "covered_lines": 10,
+      "missed_lines": 1,
       "omitted_lines": 9,
       "total_lines": 11
     },
@@ -123,16 +123,16 @@
         "end"
       ],
       "lines": [
-        0,
-        0,
+        1,
+        1,
         null,
-        0,
+        1,
         null,
         null
       ],
-      "lines_covered_percent": 0.0,
-      "covered_lines": 0,
-      "missed_lines": 3,
+      "lines_covered_percent": 100.0,
+      "covered_lines": 3,
+      "missed_lines": 0,
       "omitted_lines": 3,
       "total_lines": 3
     },
@@ -145,15 +145,15 @@
         "end"
       ],
       "lines": [
-        0,
-        0,
-        0,
+        1,
+        1,
+        3,
         null,
         null
       ],
-      "lines_covered_percent": 0.0,
-      "covered_lines": 0,
-      "missed_lines": 3,
+      "lines_covered_percent": 100.0,
+      "covered_lines": 3,
+      "missed_lines": 0,
       "omitted_lines": 2,
       "total_lines": 3
     },
@@ -163,12 +163,12 @@
         "end"
       ],
       "lines": [
-        0,
+        1,
         null
       ],
-      "lines_covered_percent": 0.0,
-      "covered_lines": 0,
-      "missed_lines": 1,
+      "lines_covered_percent": 100.0,
+      "covered_lines": 1,
+      "missed_lines": 0,
       "omitted_lines": 1,
       "total_lines": 1
     },
@@ -178,12 +178,12 @@
         "end"
       ],
       "lines": [
-        0,
+        1,
         null
       ],
-      "lines_covered_percent": 0.0,
-      "covered_lines": 0,
-      "missed_lines": 1,
+      "lines_covered_percent": 100.0,
+      "covered_lines": 1,
+      "missed_lines": 0,
       "omitted_lines": 1,
       "total_lines": 1
     },
@@ -238,114 +238,100 @@
         "end"
       ],
       "lines": [
-        0,
-        0,
+        1,
+        1,
         null
       ],
-      "lines_covered_percent": 0.0,
-      "covered_lines": 0,
-      "missed_lines": 2,
+      "lines_covered_percent": 100.0,
+      "covered_lines": 2,
+      "missed_lines": 0,
       "omitted_lines": 1,
       "total_lines": 2
     },
     "app/models/companion.rb": {
       "source": [
         "class Companion < ApplicationRecord",
-        "  validates :companion_name, presence: true, length: { maximum: 255}",
-        "  ",
-        "  has_many :record_companions",
-        "  has_many :record, throuth: :record_companions",
+        "  validates :companion_name, presence: true, length: { maximum: 50 }",
+        "",
+        "  has_many :record_companions, dependent: :destroy",
+        "  has_many :records, through: :record_companions",
+        "  belongs_to :user",
         "end"
       ],
       "lines": [
-        0,
-        0,
+        1,
+        1,
         null,
-        0,
-        0,
+        1,
+        1,
+        1,
         null
       ],
-      "lines_covered_percent": 0.0,
-      "covered_lines": 0,
-      "missed_lines": 4,
+      "lines_covered_percent": 100.0,
+      "covered_lines": 5,
+      "missed_lines": 0,
       "omitted_lines": 2,
-      "total_lines": 4
-    },
-    "app/models/genre.rb": {
-      "source": [
-        "class Genre < ApplicationRecord",
-        "end"
-      ],
-      "lines": [
-        0,
-        null
-      ],
-      "lines_covered_percent": 0.0,
-      "covered_lines": 0,
-      "missed_lines": 1,
-      "omitted_lines": 1,
-      "total_lines": 1
+      "total_lines": 5
     },
     "app/models/movie.rb": {
       "source": [
         "class Movie < ApplicationRecord",
+        "  validates :tmdb_id, presence: true, uniqueness: true",
+        "  validates :title, presence: true",
+        "",
+        "  has_many :records, dependent: :restrict_with_error",
         "end"
       ],
       "lines": [
-        0,
+        1,
+        1,
+        1,
+        null,
+        1,
         null
       ],
-      "lines_covered_percent": 0.0,
-      "covered_lines": 0,
-      "missed_lines": 1,
-      "omitted_lines": 1,
-      "total_lines": 1
-    },
-    "app/models/movie_genre.rb": {
-      "source": [
-        "class MovieGenre < ApplicationRecord",
-        "end"
-      ],
-      "lines": [
-        0,
-        null
-      ],
-      "lines_covered_percent": 0.0,
-      "covered_lines": 0,
-      "missed_lines": 1,
-      "omitted_lines": 1,
-      "total_lines": 1
+      "lines_covered_percent": 100.0,
+      "covered_lines": 4,
+      "missed_lines": 0,
+      "omitted_lines": 2,
+      "total_lines": 4
     },
     "app/models/record.rb": {
       "source": [
         "class Record < ApplicationRecord",
-        "  validates :rating, presence: true",
-        "  validates :impretion, length: { maximum: 65_535}",
-        "  validates :watched_at, presence: true",
-        "  validates :memory_note, length: { maximum: 65_535}",
+        "  validates :rating, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 10 }",
+        "  validates :impression, length: { maximum: 1000 }",
+        "  validates :watched_day, presence: true",
+        "  validates :memory_note, length: { maximum: 1000 }",
+        "",
         "",
         "  belongs_to :user",
+        "  belongs_to :movie",
         "  belongs_to :theater",
-        "  has_many :companion, throuth: :record_companion",
+        "  has_many :companions, through: :record_companion",
+        "  has_many :record_companions, dependent: :destroy",
         "end"
       ],
       "lines": [
-        0,
-        0,
-        0,
-        0,
-        0,
+        1,
+        1,
+        1,
+        1,
+        1,
         null,
-        0,
-        0,
-        0,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
         null
       ],
-      "lines_covered_percent": 0.0,
-      "covered_lines": 0,
-      "missed_lines": 8,
-      "omitted_lines": 2,
-      "total_lines": 8
+      "lines_covered_percent": 100.0,
+      "covered_lines": 10,
+      "missed_lines": 0,
+      "omitted_lines": 3,
+      "total_lines": 10
     },
     "app/models/record_companion.rb": {
       "source": [
@@ -357,41 +343,41 @@
         "end"
       ],
       "lines": [
-        0,
-        0,
+        1,
+        1,
         null,
-        0,
-        0,
+        1,
+        1,
         null
       ],
-      "lines_covered_percent": 0.0,
-      "covered_lines": 0,
-      "missed_lines": 4,
+      "lines_covered_percent": 100.0,
+      "covered_lines": 4,
+      "missed_lines": 0,
       "omitted_lines": 2,
       "total_lines": 4
     },
     "app/models/theater.rb": {
       "source": [
         "class Theater < ApplicationRecord",
-        "  validates :theater_name, presence: true, length { maximun: 255}",
+        "  validates :theater_name, presence: true, length: { maximum: 50 }",
         "",
         "  belongs_to :user",
-        "  has_many :records",
+        "  has_many :records, dependent: :nullify",
         "end"
       ],
       "lines": [
-        0,
-        0,
+        1,
+        1,
         null,
-        0,
-        0,
-        0
+        1,
+        1,
+        null
       ],
-      "lines_covered_percent": 0.0,
-      "covered_lines": 0,
-      "missed_lines": 5,
-      "omitted_lines": 1,
-      "total_lines": 5
+      "lines_covered_percent": 100.0,
+      "covered_lines": 4,
+      "missed_lines": 0,
+      "omitted_lines": 2,
+      "total_lines": 4
     },
     "app/models/user.rb": {
       "source": [
@@ -404,36 +390,38 @@
         "",
         "  has_many :records, dependent: :destroy",
         "  has_many :theaters, dependent: :destroy",
+        "  has_many :companions, dependent: :destroy",
         "end"
       ],
       "lines": [
-        0,
+        1,
         null,
         null,
-        0,
+        1,
         null,
-        0,
+        1,
         null,
-        0,
-        0,
+        1,
+        1,
+        1,
         null
       ],
-      "lines_covered_percent": 0.0,
-      "covered_lines": 0,
-      "missed_lines": 5,
+      "lines_covered_percent": 100.0,
+      "covered_lines": 6,
+      "missed_lines": 0,
       "omitted_lines": 5,
-      "total_lines": 5
+      "total_lines": 6
     }
   },
   "groups": {
     "Controllers": {
       "lines": {
-        "covered": 0,
-        "missed": 17,
+        "covered": 16,
+        "missed": 1,
         "omitted": 14,
         "total": 17,
-        "percent": 0.0,
-        "strength": 0.0
+        "percent": 94.11764705882354,
+        "strength": 2.411764705882353
       },
       "files": [
         "app/controllers/application_controller.rb",
@@ -457,19 +445,17 @@
     },
     "Models": {
       "lines": {
-        "covered": 0,
-        "missed": 31,
-        "omitted": 16,
-        "total": 31,
-        "percent": 0.0,
-        "strength": 0.0
+        "covered": 35,
+        "missed": 0,
+        "omitted": 17,
+        "total": 35,
+        "percent": 100.0,
+        "strength": 1.0
       },
       "files": [
         "app/models/application_record.rb",
         "app/models/companion.rb",
-        "app/models/genre.rb",
         "app/models/movie.rb",
-        "app/models/movie_genre.rb",
         "app/models/record.rb",
         "app/models/record_companion.rb",
         "app/models/theater.rb",
@@ -491,12 +477,12 @@
     },
     "Helpers": {
       "lines": {
-        "covered": 0,
-        "missed": 2,
+        "covered": 2,
+        "missed": 0,
         "omitted": 2,
         "total": 2,
-        "percent": 0.0,
-        "strength": 0.0
+        "percent": 100.0,
+        "strength": 1.0
       },
       "files": [
         "app/helpers/application_helper.rb",

@@ -7,5 +7,5 @@ class User < ApplicationRecord
 
   has_many :records, dependent: :destroy
   has_many :theaters, dependent: :destroy
-  has?many :companions, dependent: :destroy
+  has_many :companions, dependent: :destroy
 end

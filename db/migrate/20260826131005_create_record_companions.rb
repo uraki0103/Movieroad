@@ -7,6 +7,6 @@ class CreateRecordCompanions < ActiveRecord::Migration[8.1]
       t.timestamps
     end
 
-    add_index :record_companions, [:record_id, :companion_id], unique: true
+    add_index :record_companions, [ :record_id, :companion_id ], unique: true
   end
 end
