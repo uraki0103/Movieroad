@@ -7,7 +7,7 @@ class Record < ApplicationRecord
 
   belongs_to :user
   belongs_to :movie
-  belongs_to :theater
+  belongs_to :theater, optional: true
   has_many :companions, through: :record_companion
   has_many :record_companions, dependent: :destroy
 end
