@@ -2,9 +2,29 @@ ja:
   activerecord:
     models:
       user: ユーザー
+      record: 鑑賞記録
+      theater: 観賞場所
+      companion: 観た人
+      movie: 映画
     attributes:
       user:
         name: ユーザー名
         email: メールアドレス
         password: パスワード
-        password_confirmation: パスワード再確認
+        password_confirmation: パスワード再確認      
+      record:
+        rating: 評価
+        impression: 感想
+        watched_day: 鑑賞日
+        memory_note: 思い出
+      theater:
+        theater_name: 観賞場所
+      companion:
+        companion_name: 観た人
+      movie:
+        title: タイトル
+        release_year: 公開日
+        
+
+
+      
