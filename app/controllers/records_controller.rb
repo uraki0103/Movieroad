@@ -1,6 +1,6 @@
 class RecordsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_record, only: %i[show edit update]
+  before_action :set_record, only: %i[show edit update destroy]
 
   def index
     @records_by_year = current_user.records.includes(:movie, :theater).order(watched_day: :desc).group_by { |record| record.watched_day.year }
@@ -40,6 +40,11 @@ class RecordsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @record.destroy
+    redirect_to records_path, notice: "記録を削除しました", status: :see_other
   end
 
   private

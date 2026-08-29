@@ -5,7 +5,7 @@
     "simplecov_version": "1.1.1",
     "command_name": "RSpec",
     "project_name": "App",
-    "timestamp": "2026-08-29T12:19:27.212+00:00",
+    "timestamp": "2026-08-29T12:56:41.837+00:00",
     "root": "/app",
     "commit": null,
     "primary_coverage": "line",
@@ -15,12 +15,12 @@
   },
   "total": {
     "lines": {
-      "covered": 65,
-      "missed": 28,
-      "omitted": 74,
-      "total": 93,
-      "percent": 69.89247311827957,
-      "strength": 1.0
+      "covered": 66,
+      "missed": 30,
+      "omitted": 76,
+      "total": 96,
+      "percent": 68.75,
+      "strength": 0.9791666666666666
     }
   },
   "coverage": {
@@ -117,7 +117,7 @@
       "source": [
         "class RecordsController < ApplicationController",
         "  before_action :authenticate_user!",
-        "  before_action :set_record, only: %i[show edit update]",
+        "  before_action :set_record, only: %i[show edit update destroy]",
         "",
         "  def index",
         "    @records_by_year = current_user.records.includes(:movie, :theater).order(watched_day: :desc).group_by { |record| record.watched_day.year }",
@@ -129,7 +129,7 @@
         "",
         "  def create",
         "    @record = current_user.records.build(record_params)",
-        "    ",
+        "",
         "    unless assign_movie(@record)",
         "      return render :new, status: :unprocessable_entity",
         "    end",
@@ -151,12 +151,17 @@
         "    unless assign_movie(@record)",
         "      return render :edit, status: :unprocessable_entity",
         "    end",
-        "    ",
+        "",
         "    if @record.update(record_params)",
         "      redirect_to records_path, notice: \"記録を更新しました\"",
         "    else",
         "      render :edit, status: :unprocessable_entity",
         "    end",
+        "  end",
+        "",
+        "  def destroy",
+        "    @record.destroy",
+        "    redirect_to records_path, notice: \"記録を削除しました\", status: :see_other",
         "  end",
         "",
         "  private",
@@ -229,6 +234,11 @@
         null,
         null,
         1,
+        0,
+        0,
+        null,
+        null,
+        1,
         null,
         1,
         0,
@@ -252,11 +262,11 @@
         null,
         null
       ],
-      "lines_covered_percent": 44.11764705882353,
-      "covered_lines": 15,
-      "missed_lines": 19,
-      "omitted_lines": 33,
-      "total_lines": 34
+      "lines_covered_percent": 43.24324324324324,
+      "covered_lines": 16,
+      "missed_lines": 21,
+      "omitted_lines": 35,
+      "total_lines": 37
     },
     "app/controllers/top_controller.rb": {
       "source": [
@@ -538,12 +548,12 @@
   "groups": {
     "Controllers": {
       "lines": {
-        "covered": 28,
-        "missed": 20,
-        "omitted": 44,
-        "total": 48,
-        "percent": 58.333333333333336,
-        "strength": 1.1666666666666667
+        "covered": 29,
+        "missed": 22,
+        "omitted": 46,
+        "total": 51,
+        "percent": 56.86274509803921,
+        "strength": 1.1176470588235294
       },
       "files": [
         "app/controllers/application_controller.rb",
