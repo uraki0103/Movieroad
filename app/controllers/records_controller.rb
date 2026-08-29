@@ -2,7 +2,7 @@ class RecordsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    # @records_by_year = current_user.records.includes(:movie, :theater).order_by(:watched_day, :desc).group_by{ |record| record.watched_day.year }
+    @records_by_year = current_user.records.includes(:movie, :theater).order(watched_day: :desc).group_by { |record| record.watched_day.year }
   end
 
   def new
@@ -12,7 +12,10 @@ class RecordsController < ApplicationController
   def create
     @record = current_user.records.build(record_params)
 
-    Rails.logger.debug "movie_title_param = #{movie_title_param.inspect}"
+    Rails.logger.debug "===== DEBUG ====="
+    Rails.logger.debug "params[:record]: #{params[:record].inspect}"
+    Rails.logger.debug "movie_title_param: #{movie_title_param.inspect}"
+    Rails.logger.debug "=================="
 
     if movie_title_param.blank?
       @record.errors.add(:base, "映画タイトルを入力してください")
@@ -26,6 +29,10 @@ class RecordsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def show
+    @record = current_user.records.find(params[:id])
   end
 
   private
