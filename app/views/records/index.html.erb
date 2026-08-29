@@ -8,9 +8,11 @@
   <% @records_by_year.each do |year, records| %>
     <p><%= year %>年</p>
     <% records.each do |record| %>
-      <%= link_to record_path(record) do %>
-        <%= record.movie.title  %>
-      <% end %>
+      <div class= "flex flex-col">
+        <%= link_to record_path(record) do %>
+          <%= record.movie.title  %>
+        <% end %>
+      </div>
     <% end %>
   <% end %>
 </div>
