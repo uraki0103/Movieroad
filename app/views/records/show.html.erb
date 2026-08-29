@@ -1,0 +1,15 @@
+<div class="max-w-2xl mx-auto bg-white border border-stone-200 rounded-lg p-8"> 
+  <div class="mb-6">
+    <%= link_to "← タイムラインに戻る" , records_path, class: "text-sm text-stone-600 hover:text-stone-900"%>
+  </div>
+
+  <h2 class="text-2xl font-semibold text-stone-900 mb-2"><%= @record.movie.title %></h2>
+
+  <div class="flex item-center gap-2 border-t border-stone-200 pt-4 mb-2">
+    <span class="text-xl font-semibold text-amber-900"><%= @record.rating %></span>
+  </div>
+
+  <p class="text-sm text-stone-600 mb-6"><%= @record.watched_day.strftime("%Y/%m/%d") %></p>
+  
+
+</div>
