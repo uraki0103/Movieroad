@@ -67,4 +67,12 @@ RSpec.describe Record, type: :model do
       expect(too_many_words_note_record).to be_invalid
     end
   end
+
+  describe "theater" do
+    it "他のuser_idで登録されたtheaterを登録しようとした場合、登録に失敗する" do
+      record = build(:record, theater: create(:theater))
+      expect(record).to be_invalid
+      expect(record.errors[:theater]).to be_present
+    end
+  end
 end
