@@ -1,3 +1,20 @@
-<h1>タイムライン<h1>
+<div class="">
+  <h1>タイムライン<h1>
 
-<p>仮の画面です</p>
+  <p>仮の画面です</p>
+
+  <%= link_to "新規作成仮リンク", new_record_path %>
+
+  <% @records_by_year.each do |year, records| %>
+    <p><%= year %>年</p>
+    <% records.each do |record| %>
+      <div class= "flex flex-col">
+        <%= link_to record_path(record) do %>
+          <%= record.movie.title  %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+
