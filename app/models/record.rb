@@ -10,6 +10,7 @@ class Record < ApplicationRecord
   belongs_to :theater, optional: true
   has_many :companions, through: :record_companion
   has_many :record_companions, dependent: :destroy
+  has_many_attached :memory_photos
 
   private
 
