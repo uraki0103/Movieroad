@@ -67,6 +67,6 @@ class RecordsController < ApplicationController
   end
 
   def record_params
-    params.require(:record).permit(:rating, :watched_day)
+    params.require(:record).permit(:rating, :watched_day, :impression)
   end
 end

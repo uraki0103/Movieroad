@@ -16,4 +16,11 @@
   </div>
 
   <p class="text-sm text-stone-600 mb-6"><%= @record.watched_day.strftime("%Y/%m/%d") %></p>
+
+  <% if @record.impression.present? %>
+    <div class="border-t border-stone-200 pt-4 mt-4">
+      <p class="text-sm text-stone-500 mb-2">感想</p>
+      <p class="text-sm text-stone-900 whitespace-pre-wrap leading-relaxed"><%= @record.impression %></p>
+    </div>
+  <% end %>
 </div>
