@@ -13,7 +13,7 @@ class RecordsController < ApplicationController
   def create
     @record = current_user.records.build(record_params)
 
-    unless assign_movie(@record)
+    unless assign_movie(@record) && assign_theater(@record)
       return render :new, status: :unprocessable_entity
     end
 
@@ -31,7 +31,7 @@ class RecordsController < ApplicationController
   end
 
   def update
-    unless assign_movie(@record)
+    unless assign_movie(@record) && assign_theater(@record)
       return render :edit, status: :unprocessable_entity
     end
 
@@ -55,7 +55,35 @@ class RecordsController < ApplicationController
       return false
     end
 
-    record.movie = Movie.find_or_create_by(title: movie_title_param)
+    movie = Movie.find_or_create_for(movie_title_param)
+
+    unless movie.persisted?
+      record.errors.add(:base, "映画情報の保存に失敗しました")
+      return false
+    end
+
+    record.movie = movie
+    true
+  end
+
+  def assign_theater(record)
+      Rails.logger.debug "===== assign_theater START ====="
+      Rails.logger.debug "theater_name_param: #{theater_name_param.inspect}"
+    if theater_name_param.blank?
+      Rails.logger.debug "===== theater_name is blank ====="
+      record.theater = nil
+      return true
+    end
+
+    theater = Theater.find_or_create_for(current_user, theater_name_param)
+
+    unless theater.persisted?
+      record.errors.add(:base, "観賞場所の保存に失敗しました")
+      return false
+    end
+
+    record.theater = theater
+    true
   end
 
   def set_record
@@ -64,6 +92,10 @@ class RecordsController < ApplicationController
 
   def movie_title_param
     params.dig(:record, :movie_title)
+  end
+
+  def theater_name_param
+    params.dig(:record, :theater_name)
   end
 
   def record_params
