@@ -67,10 +67,7 @@ class RecordsController < ApplicationController
   end
 
   def assign_theater(record)
-      Rails.logger.debug "===== assign_theater START ====="
-      Rails.logger.debug "theater_name_param: #{theater_name_param.inspect}"
     if theater_name_param.blank?
-      Rails.logger.debug "===== theater_name is blank ====="
       record.theater = nil
       return true
     end
