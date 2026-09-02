@@ -86,15 +86,15 @@ class RecordsController < ApplicationController
   def assign_companions(record)
     names = companion_names_param.reject(&:blank?).uniq
     companions = names.map { |name| current_user.companions.find_or_create_by(companion_name: name) }
-    
 
-    if companions.any? { |c| !c.persisted?}
+
+    if companions.any? { |c| !c.persisted? }
       record.errors.add(:base, "観た人の保存に失敗しました")
       return false
     end
 
     record.companions = companions
-    return true
+    true
   end
 
   def set_record
