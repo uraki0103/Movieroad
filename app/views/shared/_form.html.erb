@@ -1,6 +1,6 @@
 <% if @record.errors.any? %>
   <div class="mb-4 bg-red-50 text-red-900 text-sm rounded-md p-3">
-    <p class="font-midium mb-1">
+    <p class="font-medium mb-1">
       <%= t("errors.messages.not_saved", count: @record.errors.count, resource: @record.class.model_name.human.downcase) %>
     </p>
     <ul class="list-disc list-inside">
@@ -31,7 +31,7 @@
 	<div class="mb-6 md:max-w-xs">
 		<%= f.label :watched_day, "鑑賞日時", class: "block text-sm text-stone-600 mb-1" %>
 		<%= f.date_field :watched_day, 
-				class: "w-full border border-stone-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 fpcus:ring-amber-900" %>
+				class: "w-full border border-stone-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-900" %>
 	</div>
 
 	<div class="mb-6">
@@ -59,6 +59,43 @@
             data-tag-picker-name-param="<%= theater.theater_name %>"
             class="text-xs bg-amber-50 text-amber-900 px-3 py-1 rounded-full hover:bg-amber-100 transition-colors">
           <%= theater.theater_name %>
+        </button>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div class="mb-6" data-controller="companion-picker">
+  <label class="block text-sm text-stone-600 mb-1">
+    観た人 <span class="text-stone-400">(任意)</span>
+  </label>
+
+  <div data-companion-picker-target="chips" class="flex flex-wrap gap-2 mb-2">
+    <% record.companions.each do |companion| %>
+      <span class="inline-flex items-center gap-1 bg-amber-50 text-amber-900 text-xs px-3 py-1 rounded-full">
+        <%= companion.companion_name %>
+        <input type="hidden" name="record[companion_names][]" value="<%= companion.companion_name %>">
+        <button type="button" data-action="companion-picker#remove" class="ml-1 text-amber-700 hover:text-amber-900">×</button>
+      </span>
+    <% end %>
+  </div>
+
+  <div class="flex gap-2">
+    <input type="text" data-companion-picker-target="input"
+        placeholder="名前を入力して追加"
+        data-action="keydown.enter->companion-picker#addFromInput:prevent"
+        class="flex-1 border border-stone-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-900">
+    <button type="button" data-action="companion-picker#addFromInput"
+        class="text-sm text-amber-900 border border-amber-900 rounded-md px-3 hover:bg-amber-50">追加</button>
+  </div>
+
+  <% if current_user.companions.any? %>
+    <div class="flex flex-wrap gap-2 mt-2">
+      <% current_user.companions.order(:companion_name).each do |companion| %>
+        <button type="button" data-action="companion-picker#addExisting"
+            data-companion-picker-name-param="<%= companion.companion_name %>"
+            class="text-xs bg-stone-100 text-stone-700 px-3 py-1 rounded-full hover:bg-stone-200 transition-colors">
+          <%= companion.companion_name %>
         </button>
       <% end %>
     </div>
