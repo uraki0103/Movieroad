@@ -1,0 +1,2 @@
+module RecordMemoryPhotosHelper
+end

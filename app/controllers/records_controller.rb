@@ -3,7 +3,7 @@ class RecordsController < ApplicationController
   before_action :set_record, only: %i[show edit update destroy]
 
   def index
-    @records_by_year = current_user.records.includes(:movie, :theater, :companions).order(watched_day: :desc).group_by { |record| record.watched_day.year }
+    @records_by_year = current_user.records.includes(:movie, :theater, :companions, memory_photos_attachments: :blob).order(watched_day: :desc).group_by { |record| record.watched_day.year }
   end
 
   def new
@@ -35,7 +35,8 @@ class RecordsController < ApplicationController
       return render :edit, status: :unprocessable_entity
     end
 
-    if @record.update(record_params)
+    if @record.update(record_params.except(:memory_photos))
+      attach_memory_photos
       redirect_to records_path, notice: "記録を更新しました"
     else
       render :edit, status: :unprocessable_entity
@@ -97,6 +98,11 @@ class RecordsController < ApplicationController
     true
   end
 
+  def attach_memory_photos
+    photos = record_params[:memory_photos]&.reject(&:blank?)
+    @record.memory_photos.attach(photos) if photos.present?
+  end
+
   def set_record
     @record = current_user.records.find(params[:id])
   end
@@ -114,6 +120,6 @@ class RecordsController < ApplicationController
   end
 
   def record_params
-    params.require(:record).permit(:rating, :watched_day, :impression, :memory_note)
+    params.require(:record).permit(:rating, :watched_day, :impression, :memory_note, memory_photos: [])
   end
 end

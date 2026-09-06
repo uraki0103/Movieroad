@@ -1,0 +1,8 @@
+<div class="relative" id="<%= dom_id(photo) %>">
+  <%= image_tag photo, class: "w-16 h-16 object-cover rounded-md border border-stone-200" %>
+  <%= button_to record_memory_photo_path(record, photo), method: :delete,
+      class: "absolute -top-2 -right-2 bg-white border border-stone-300 rounded-full w-5 h-5 flex items-center justify-center text-xs text-stone-600 hover:bg-red-50 hover:text-red-700",
+      form: { data: { turbo_confirm: "この写真を削除しますか？" } } do %>
+    ×
+  <% end %>
+</div>
