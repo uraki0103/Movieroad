@@ -11,7 +11,7 @@
   </div>
 <% end %>
 
-<%= form_with model: record, url: url do |f| %>
+
 	<div class="mb-4">
 		<%= label_tag "record_movie_title", "映画タイトル", class:"block text-sm text-stone-600 mb-1" %>
 		<%= text_field_tag "record[movie_title]", @record.movie&.title, 
@@ -108,9 +108,12 @@
 		<% end %>
     <%= f.text_area :memory_note, rows: 4, maxlength: 1000, placeholder: "グッズ・チケット・飲食物・入場者プレゼントなど、観た際の思い出をまとめて残そう！",
         class: "w-full border border-stone-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-900" %>
+    
+    <%= f.label :memory_photos, class: "block text-sm text-stone-600 mb-1" do %>
+        写真 <span class="text-stone-400">複数選択可</span>
+    <% end %>
+    <%= f.file_field :memory_photos, multiple: true, accept: "image/*",
+        class: "w-full text-sm text-stone-600 file:mr-3 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-amber-50 file:text-amber-900 file:text-sm hover:file:bg-amber-100" %>
   </div>
 
-	<%= f.submit submit_label,
-			class: "w-full md:w-auto bg-amber-900 text-white px-6 py-2 rounded-md font-medium hover:bg-amber-800 transition-colors cursor-pointer" %>
-<% end %>
                             
