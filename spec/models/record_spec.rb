@@ -75,4 +75,27 @@ RSpec.describe Record, type: :model do
       expect(record.errors[:theater]).to be_present
     end
   end
+
+  describe "memory_photos" do
+    it "写真の保存に成功する" do
+      record = create(:record)
+      record.memory_photos.attach(
+        io: StringIO.new("ghost_photo"),
+        filename: "ghost.jpg.",
+        content_type: "image/jpeg"
+      )
+      expect(record.memory_photos.count).to eq(1)
+    end
+
+    it "すでに写真を保存してある記録に写真を追加できる" do
+      record = create(:record)
+      record.memory_photos.attach(
+        io: StringIO.new("photo1"), filename: "scary_photo", content_type: "image/jpeg"
+      )
+      record.memory_photos.attach(
+        io: StringIO.new("photo2"), filename: "poltergeist_photo", content_type: "image/jpeg"
+      )
+      expect(record.memory_photos.count).to eq(2)
+    end
+  end
 end
