@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :records, only: %i[new create index show edit update destroy] do
     resources :memory_photos, only: %i[destroy], controller: "record_memory_photos"
   end
+  resources :movie_searches, only: %i[index]
+
   root "top#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

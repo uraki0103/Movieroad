@@ -412,6 +412,7 @@ DEPENDENCIES
   devise-i18n
   dotenv-rails
   factory_bot_rails
+  faraday
   importmap-rails
   jbuilder
   pg (~> 1.1)
