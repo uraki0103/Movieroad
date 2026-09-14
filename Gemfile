@@ -39,6 +39,7 @@ gem "devise"
 gem "rails-i18n", "~> 8.1"
 gem "devise-i18n"
 gem "cloudinary"
+gem "dotenv-rails"
 gem "faraday"
 
 
