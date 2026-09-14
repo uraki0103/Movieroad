@@ -407,6 +407,7 @@ DEPENDENCIES
   devise
   devise-i18n
   factory_bot_rails
+  faraday
   importmap-rails
   jbuilder
   pg (~> 1.1)

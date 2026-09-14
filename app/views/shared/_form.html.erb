@@ -11,12 +11,26 @@
   </div>
 <% end %>
 
-
-	<div class="mb-4">
-		<%= label_tag "record_movie_title", "映画タイトル", class:"block text-sm text-stone-600 mb-1" %>
-		<%= text_field_tag "record[movie_title]", @record.movie&.title, 
-			  class:"w-full border border-stone-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-amber-900" %>
-	</div>
+	<%= label_tag "record_movie_title", "映画タイトル", class:"block text-sm text-stone-600 mb-1" %>
+	
+  <div class="mb-4 flex gap-2">
+		<div class="w-full flex gap-2">
+      <%= text_field_tag "record[movie_title]", @record.movie&.title, 
+          placeholder: "右のボタンを押してタイトル検索orこのフォームに直接タイトルを入力",
+          data: { "movie-search-target": "titleInput" },
+		  	  class:"flex-1 border border-stone-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-amber-900"%>
+          <button type="button" data-action="movie-search#open"
+          class="px-3 whitespace-nowrap border border-stone-300 rounded-md text-stone-600 hover:bg-stone-50">
+        <i class="ti ti-search"></i>検索する
+      </button>
+    </div>
+    <%= hidden_field_tag "record[tmdb_id]", record.movie&.tmdb_id,
+        data: { "movie-search-target": "hiddenTmdbId" } %>
+    <%= hidden_field_tag "record[release_year]", record.movie&.release_year,
+        data: { "movie-search-target": "hiddenReleaseYear" } %>
+    <%= hidden_field_tag "record[poster_url]", record.movie&.poster_url,
+        data: { "movie-search-target": "hiddenPosterUrl" } %>
+  </div>
 
 	<div class="mb-4">
 		<%= f.label :rating , "評価", class: "block text-sm text-stone-600 mb-1"%>
