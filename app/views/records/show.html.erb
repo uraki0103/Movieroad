@@ -9,13 +9,23 @@
     </div>
   </div>
 
-  <h2 class="text-2xl font-semibold text-stone-900 mb-2"><%= @record.movie.title %></h2>
-
-  <div class="flex items-center gap-2 border-t border-stone-200 pt-4 mb-2">
-    <span class="text-xl font-semibold text-amber-900"><%= @record.rating %></span>
+  <div class="flex justify-between gap-4 mb-4">
+    <div class="flex-1 ">
+      <h2 class="text-2xl font-semibold text-stone-900 mb-2 border-b border-stone-200 pt-4 mt-4"><%= @record.movie.title %></h2>
+      <div class="flex items-center gap-4 pt-4 mb-2">
+        <span class="text-xl font-semibold text-amber-900"><%= @record.rating %></span>
+        <p class="text-sm text-stone-600"><%= @record.watched_day.strftime("%Y/%m/%d") %></p>
+      </div>
+    </div>
+    <% if @record.movie.poster_url.present? %>
+      <%= image_tag @record.movie.poster_url, class: "w-60 h-84 object-cover rounded-md border border-stone-200 flex-shrink-0" %>
+    <% else %>
+      <div class="w-60 h-84 bg-stone-100 rounded-md border border-stone-200 flex items-center justify-center text-stone-300 text-xs flex-shrink-0">
+        No image 
+      </div>
+    <% end %>
   </div>
-
-  <p class="text-sm text-stone-600 mb-6"><%= @record.watched_day.strftime("%Y/%m/%d") %></p>
+  
 
   <% if @record.impression.present? %>
     <div class="border-t border-stone-200 pt-4 mt-4">
