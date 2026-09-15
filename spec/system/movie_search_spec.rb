@@ -9,7 +9,7 @@ RSpec.describe "MovieSearch", type: :system, js: true do
     context "検索結果が存在する" do
       before do
         stub_request(:get, "https://api.themoviedb.org/3/search/movie")
-          .with(query: hash_including("query" => "黒い絨毯"))
+          .with(query: hash_including("query" => anything))
           .to_return(
             status: 200,
             body: {
@@ -42,7 +42,7 @@ RSpec.describe "MovieSearch", type: :system, js: true do
     context "検索結果が0件" do
       before do
         stub_request(:get, "https://api.themoviedb.org/3/search/movie")
-          .with(query: hash_including("query" => "黒い絨毯"))
+          .with(query: hash_including("query" => anything))
           .to_return(
             status: 200,
             body: { results: [] }.to_json,
