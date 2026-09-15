@@ -1,0 +1,34 @@
+<%= turbo_stream.update "movie_search_results" do %>
+  <% if @query.blank? %>
+    <p class="text-sm text-stone-400 text-center py-8">映画タイトルを入力してください</p>
+  <% elsif @results.empty? %>
+    <p class="text-sm text-stone-400 text-center py-8">
+      該当する作品が見つかりませんでした。<br>
+      入力したタイトルをそのまま記録することもできます。
+    </p>
+  <% else %>
+    <div class="space-y-2 max-h-80 overflow-y-auto">
+      <% @results.first(10).each do |movie| %>
+        <button type="button"
+          data-action="movie-search#select"
+          data-movie-search-title-param="<%= movie[:title] %>"
+          data-movie-search-tmdb-id-param="<%= movie[:id] %>"
+          data-movie-search-release-year-param="<%= movie[:release_date]&.slice(0, 4) %>"
+          data-movie-search-poster-url-param="<%= movie[:poster_path].present? ? "https://tmdb.org/t/p/w500#{movie[:poster_path]}" : '' %>"
+          class="w-full flex items-center gap-3 p-2 rounded-md hover:bg-stone-50 text-left">
+          <% if movie[:poster_path].present? %>
+            <img src="https://image.tmdb.org/t/p/w92<%= movie[:poster_path] %>" class="w-10 h-15 object-cover rounded">
+          <% else %>
+            <div class="w-10 h-14 bg-stone-100 rounded flex items-center justify-center text-stone-300 text-xs">No image</div>
+          <% end %>
+          <div class="flex-1 text-left">
+            <p class="text-sm font-medium text-stone-900"><%= movie[:title] %></p>
+            <p class="text-xs text-stone-500"><%= movie[:release_date]&.slice(0, 4) %></p>
+            </div>
+        </button>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+
+

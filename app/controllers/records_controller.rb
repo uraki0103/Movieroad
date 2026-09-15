@@ -56,7 +56,7 @@ class RecordsController < ApplicationController
       return false
     end
 
-    movie = Movie.find_or_create_for(movie_title_param)
+    movie = find_or_build_movie
 
     unless movie.persisted?
       record.errors.add(:base, "映画情報の保存に失敗しました")
@@ -65,6 +65,23 @@ class RecordsController < ApplicationController
 
     record.movie = movie
     true
+  end
+
+  def find_or_build_movie
+    if tmdb_id_param.present?
+      movie = Movie.find_or_initialize_by(tmdb_id: tmdb_id_param)
+      movie.title = movie_title_param
+      movie.release_year = release_year_param if release_year_param.present?
+      movie.poster_url = poster_url_param if poster_url_param.present?
+      movie.save
+      movie
+    else
+      Movie.find_or_create_by(title: movie_title_param)
+    end
+  end
+
+  def tmdb_id_param
+    params.dig(:record, :tmdb_id).presence
   end
 
   def assign_theater(record)
@@ -109,6 +126,14 @@ class RecordsController < ApplicationController
 
   def movie_title_param
     params.dig(:record, :movie_title)
+  end
+
+  def release_year_param
+    params.dig(:record, :release_year).presence
+  end
+
+  def poster_url_param
+    params.dig(:record, :poster_url).presence
   end
 
   def theater_name_param

@@ -1,0 +1,25 @@
+<%= turbo_frame_tag "movie_search_modal" do %>
+  <div data-movie-search-target="modal"
+      data-action="click->movie-search#closeOnBackground"
+      class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 ">
+    <div class="bg-white rounded-lg p-4 w-full max-w-md">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-semibold text-stone-900">映画を検索</h3>
+        <button type="button" data-action="movie-search#close" class="text-stone-400 hover:text-stone-600">x</button>
+      </div>
+
+      <%= form_with url: movie_searches_path, method: :get,
+          data: { turbo_frame: "_top", turbo_stream: true, controller: "" } do %>
+        <%= text_field_tag :query, nil,
+            placeholder: "作品名を入力",
+            oninput: "this.form.requestSubmit()",
+            class: "w-full border border-stone-300 rounded-md px-3 py-2 p-8 text-sm mb-4 focus:outline-none focus:ring-2 focus:ring-amber-900" %>
+      <% end %>
+      
+      <div id="movie_search_results">
+        <p class="text-sm text-stone-400 text-center rounded-md px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-amber-900" >
+          映画タイトルを入力してください</p>
+      </div>
+    </div>
+  </div>
+<% end %>
