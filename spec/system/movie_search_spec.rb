@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "MovieSearch", type: :system, js:true do
+RSpec.describe "MovieSearch", type: :system, js: true do
   let(:user) { create(:user) }
 
   before { sign_in user }
@@ -57,7 +57,6 @@ RSpec.describe "MovieSearch", type: :system, js:true do
         fill_in "query", with: "黒い絨毯"
 
         expect(page).to have_content("該当する作品が見つかりませんでした。")
-
       end
     end
   end

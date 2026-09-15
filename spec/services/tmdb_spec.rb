@@ -2,9 +2,8 @@ require "rails_helper"
 
 RSpec.describe Tmdb do
   describe "映画タイトル検索" do
-
     context "存在する映画タイトルで検索する" do
-      let(:query) { "冷たい熱帯魚"}
+      let(:query) { "冷たい熱帯魚" }
       before do
         stub_request(:get, "https://api.themoviedb.org/3/search/movie")
           .with(query: hash_including("query" => query))
@@ -12,13 +11,13 @@ RSpec.describe Tmdb do
             status: 200,
             body: {
               results: [
-              { id: 100, title: "冷たい熱帯魚", release_date: "1987-09-18", poster_path: "/test.jpg" }              
+              { id: 100, title: "冷たい熱帯魚", release_date: "1987-09-18", poster_path: "/test.jpg" }
               ]
             }.to_json,
             headers: { "Content-Type" => "application/json" }
           )
       end
-      
+
       it "検索結果の配列が返る" do
         results = described_class.new.search_movies(query)
         expect(results.first[:title]).to eq("冷たい熱帯魚")
@@ -26,7 +25,7 @@ RSpec.describe Tmdb do
     end
 
     context "空欄のままで検索する" do
-      let(:query) { ""}
+      let(:query) { "" }
       before do
         stub_request(:get, "https://api.themoviedb.org/3/search/movie")
             .with(query: hash_including("query" => query))
@@ -44,7 +43,7 @@ RSpec.describe Tmdb do
     end
 
     context "TMDbでエラーが発生" do
-      let(:query) { ""}
+      let(:query) { "" }
       before do
         stub_request(:get, "https://api.themoviedb.org/3/search/movie")
           .with(query: hash_including("query" => query))
