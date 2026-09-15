@@ -5,7 +5,7 @@
     "simplecov_version": "1.1.1",
     "command_name": "RSpec",
     "project_name": "App",
-    "timestamp": "2026-09-15T10:40:50.081+00:00",
+    "timestamp": "2026-09-15T14:10:46.004+00:00",
     "root": "/app",
     "commit": null,
     "primary_coverage": "line",
@@ -20,7 +20,7 @@
       "omitted": 141,
       "total": 189,
       "percent": 79.36507936507937,
-      "strength": 2.201058201058201
+      "strength": 2.328042328042328
     }
   },
   "coverage": {
@@ -146,8 +146,8 @@
         0,
         null,
         null,
-        2,
-        2,
+        8,
+        8,
         null,
         null,
         null
@@ -886,9 +886,9 @@
         11,
         null,
         null,
-        5,
+        11,
         null,
-        4,
+        10,
         null,
         null,
         1,
@@ -913,7 +913,7 @@
         "omitted": 91,
         "total": 115,
         "percent": 73.91304347826087,
-        "strength": 1.991304347826087
+        "strength": 2.0956521739130434
       },
       "files": [
         "app/controllers/application_controller.rb",
@@ -1015,7 +1015,7 @@
         "omitted": 12,
         "total": 17,
         "percent": 100.0,
-        "strength": 6.705882352941177
+        "strength": 7.411764705882353
       },
       "files": [
         "app/services/tmdb.rb"
