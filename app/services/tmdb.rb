@@ -16,6 +16,8 @@ class Tmdb
       req.params["language"] = "ja-jp"
     end
 
+    return [] unless response.success?
+
     response.body[:results] || []
   end
 
