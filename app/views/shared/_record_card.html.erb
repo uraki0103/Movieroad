@@ -1,0 +1,18 @@
+<%= link_to record_path(record), class:"inline-flex gap-3 items-center hover:opacity-80 transition-opacity" do %>
+  <% if record.movie.poster_url.present? %>
+    <%= image_tag record.movie.poster_url, class:"w-11 h-15 object-cover rounded border border-stone-200 flex-shrink-0" %>
+  <% else %>
+    <div class="w-11 h-15 bg-stone-100 rounded border border-stone-200 flex items-center justify-center text-stone-300 flex-shrink-0">
+      <i class="ti ti-photo text-sm">No image</i>
+    </div>
+  <% end %>
+
+  <div class="text-left">
+    <p class="text-sm font-medium text-stone-900"><%= record.movie.title %></p>
+    <p class="text-xs text-stone-500 flex items-center gap-1">
+      <i class="ti ti-star text-xs"></i><%= record.rating %>
+      ・<%= record.watched_day.strftime("%-m/%-d") %>
+      <% if record.theater.present? %>・<%= record.theater.theater_name %><% end %>
+    </p>
+  </div>
+<% end %>

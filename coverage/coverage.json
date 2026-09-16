@@ -5,7 +5,7 @@
     "simplecov_version": "1.1.1",
     "command_name": "RSpec",
     "project_name": "App",
-    "timestamp": "2026-09-15T14:10:46.004+00:00",
+    "timestamp": "2026-09-16T15:23:27.289+00:00",
     "root": "/app",
     "commit": null,
     "primary_coverage": "line",
@@ -15,12 +15,12 @@
   },
   "total": {
     "lines": {
-      "covered": 150,
+      "covered": 151,
       "missed": 39,
-      "omitted": 141,
-      "total": 189,
-      "percent": 79.36507936507937,
-      "strength": 2.328042328042328
+      "omitted": 142,
+      "total": 190,
+      "percent": 79.47368421052632,
+      "strength": 2.3157894736842106
     }
   },
   "coverage": {
@@ -204,7 +204,9 @@
         "  before_action :set_record, only: %i[show edit update destroy]",
         "",
         "  def index",
-        "    @records_by_year = current_user.records.includes(:movie, :theater, :companions, memory_photos_attachments: :blob).order(watched_day: :desc).group_by { |record| record.watched_day.year }",
+        "    @records_by_year = current_user.records.includes(:movie, :theater, :companions, memory_photos_attachments: :blob)",
+        "                                            .order(watched_day: :desc)",
+        "                                            .group_by { |record| record.watched_day.year }",
         "  end",
         "",
         "  def new",
@@ -356,7 +358,9 @@
         1,
         null,
         1,
-        12,
+        8,
+        null,
+        4,
         null,
         null,
         1,
@@ -502,11 +506,11 @@
         null,
         null
       ],
-      "lines_covered_percent": 77.10843373493977,
-      "covered_lines": 64,
+      "lines_covered_percent": 77.38095238095238,
+      "covered_lines": 65,
       "missed_lines": 19,
-      "omitted_lines": 67,
-      "total_lines": 83
+      "omitted_lines": 68,
+      "total_lines": 84
     },
     "app/controllers/top_controller.rb": {
       "source": [
@@ -908,12 +912,12 @@
   "groups": {
     "Controllers": {
       "lines": {
-        "covered": 85,
+        "covered": 86,
         "missed": 30,
-        "omitted": 91,
-        "total": 115,
-        "percent": 73.91304347826087,
-        "strength": 2.0956521739130434
+        "omitted": 92,
+        "total": 116,
+        "percent": 74.13793103448276,
+        "strength": 2.0775862068965516
       },
       "files": [
         "app/controllers/application_controller.rb",
