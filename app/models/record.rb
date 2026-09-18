@@ -12,6 +12,14 @@ class Record < ApplicationRecord
   has_many :companions, through: :record_companions
   has_many_attached :memory_photos
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w[watched_day]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w[movie]
+  end
+
   private
 
   def theater_belongs_to_same_user

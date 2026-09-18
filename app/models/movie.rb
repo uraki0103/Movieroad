@@ -7,4 +7,8 @@ class Movie < ApplicationRecord
   def self.find_or_create_for(title)
     find_or_create_by(title: title)
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[title]
+  end
 end

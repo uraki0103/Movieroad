@@ -50,6 +50,11 @@ class RecordsController < ApplicationController
     redirect_to records_path, notice: "記録を削除しました", status: :see_other
   end
 
+  def search
+    @q = current_user.records.ransack(params[:q])
+    @records = @q.result(distinct: true).includes(:movie, :theater, :companions).order(watched_day: :desc)
+  end
+
   private
 
   def assign_movie(record)

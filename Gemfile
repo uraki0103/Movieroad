@@ -41,6 +41,7 @@ gem "devise-i18n"
 gem "cloudinary"
 gem "dotenv-rails"
 gem "faraday"
+gem "ransack"
 
 
 group :development, :test do

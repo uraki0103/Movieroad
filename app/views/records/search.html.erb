@@ -1,0 +1,48 @@
+<div class="max-w-md md:max-w-5xl mx-auto mt-6 px-4 py-2">
+  <div class="flex items-center gap-2 mb-6">
+    <%= link_to records_path, class: "text-stone-500 hover:text-stone-900" do %>
+      <i class="ti ti-arrow-left text-md"></i>
+    <% end %>
+    <h1 class="text-lg font-semibold text-stone-900">記録を検索</h1>
+  </div>
+
+
+  <%= search_form_for @q, url: search_records_path, html: { class: "mb-8" } do |f| %>
+    <div class="grid gap-4 md:grid-cols-3 mb-4">
+      <div class="md:col-span-1">
+        <label class="block text-sm text-stone-600 mb-1">映画タイトル</label>
+        <%= f.search_field :movie_title_cont, 
+            class: "w-full border border-stone-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-900" %>
+      </div>
+      <div>
+        <label class="block text-sm text-stone 600 mb-1">鑑賞日(from)</label>
+        <%= f.date_field :watched_day_gteq,
+            class: "w-full border border-stone-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-900" %>
+      </div>
+      <div>
+        <label class="block text-sm text-stone-600 mb-1">鑑賞日(to)</label>
+        <%= f.date_field :watched_day_lteq,
+            class: "w-full border border-stone-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-900" %>
+      </div>
+    </div>
+    <div class="flex justify-end">
+      <%= f.submit "検索する", class: "bg-amber-900 text-white px-6 py-2 rounded-md font-medium hover:bg-amber-800 transition-colors cursor-pointer" %>
+    </div>          
+  <% end %>
+
+  <% if params[:q].present? %>
+    <p class="text-sm text-stone-500 mb-4"><%= @records.size %>件見つかりました</p>
+    
+    <% if @records.empty? %>
+      <p class="text-center text-stone-400 text-sm py-12">該当する記録が見つかりませんでした</p>
+    <% else %>
+      <div class="grid gap-4 md:grid-cols-2">
+        <% @records.each do |record| %>
+          <div class="border border-stone-200 rounded-md p-3">
+            <%= render "shared/record_card", record: record %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

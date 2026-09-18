@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :records, only: %i[new create index show edit update destroy] do
+    collection do
+      get :search
+    end
     resources :memory_photos, only: %i[destroy], controller: "record_memory_photos"
   end
   resources :movie_searches, only: %i[index]
