@@ -3,7 +3,9 @@ class RecordsController < ApplicationController
   before_action :set_record, only: %i[show edit update destroy]
 
   def index
-    @records_by_year = current_user.records.includes(:movie, :theater, :companions, memory_photos_attachments: :blob).order(watched_day: :desc).group_by { |record| record.watched_day.year }
+    @records_by_year = current_user.records.includes(:movie, :theater, :companions, memory_photos_attachments: :blob)
+                                            .order(watched_day: :desc)
+                                            .group_by { |record| record.watched_day.year }
   end
 
   def new
@@ -46,6 +48,11 @@ class RecordsController < ApplicationController
   def destroy
     @record.destroy
     redirect_to records_path, notice: "記録を削除しました", status: :see_other
+  end
+
+  def search
+    @q = current_user.records.ransack(params[:q])
+    @records = @q.result(distinct: true).includes(:movie, :theater, :companions).order(watched_day: :desc)
   end
 
   private

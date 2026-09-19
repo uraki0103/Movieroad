@@ -1,18 +1,60 @@
-<div class="max-w-md md:max-w-5xl mx-auto mt-10 bg-white border border-stone-200 rounded-lg p-8">
-  <h1>タイムライン<h1>
+<div class="max-w-md md:max-w-5xl mx-auto mt-6 px-4 py-2">
+  <div class="flex items-center justify-between mb-8 ">
+    <h1 class="text-lg font-semibold text-stone-900">MovieRoad</h1>
+    <div class="flex items-center gap-4">
+      <%= link_to search_records_path, class: "text-stone-500 hover:text-stone-900" do %>
+        <i class="ti ti-search text-xl"></i>
+      <% end %>
+    <%= link_to "＋記録を作成する", new_record_path, class: "text-sm font-medium text-white bg-amber-900 px-4 py-2 rounded-md hover:bg-amber-700 transition-colors" %>
+    </div>
+  </div>
+  
+  <% if @records_by_year.blank? %>
+    <div class="text-center py-20 text-stone-400 text-md">
+      記録がありません。<br>
+      右上から最初の一歩を記録しよう！
+    </div>
+  <% else %>
+    <% @records_by_year.each_with_index do |(year, records), year_index| %>
+      <details <%= "open" if year_index.zero? %> class="mb-2 group">
+      
+        <summary class="cursor-pointer py-3 border-b border-stone-200 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <i class="ti ti-movie text-amber-900"></i>  
+            <span class="text-sm font-semibold text-stone-900">
+              <%= year %>年</span>
+              <span class="text-stone-400 font-normal">全<%= records.size %>本</span>
+          </div>  
+          <i class="ti ti-chevron-down text-stone-900 transition-transform group-open:rotate-180"></i>
+        </summary>
+  
 
-  <p>仮の画面です</p>
+        <div class="relative py-8">
+          <div class="hidden md:block absolute left-1/2 top-4 bottom-4 w-px bg-stone-400 -translate-x-1/2"></div>
+          <div class="md:hidden absolute left-5 top-4 bottom-4 w-px bg-stone-400"></div>
 
-  <%= link_to "新規作成仮リンク", new_record_path %>
+          <% records.each_with_index do |record, index| %>
+            <div class="relative mb-10 last:mb-0">
+              <div class="flex gap-3 md:hidden pl-10 relative">
+                <span class="absolute left-[15px] top-6 w-3 h-3 rounded-full bg-amber-900 ring-2 ring-white"></span>
+                <%= render "shared/record_card", record: record %>
+              </div>
 
-  <% @records_by_year.each do |year, records| %>
-    <p><%= year %>年</p>
-    <% records.each do |record| %>
-      <div class= "flex flex-col">
-        <%= link_to record_path(record) do %>
-          <%= record.movie.title  %>
-        <% end %>
-      </div>
+              <div class="hidden md:grid md:grid-cols-[minmax(0,1fr)_72px_minmax(0,1fr)] md:items-center">
+                <% if index.even? %>
+                  <div class="flex justify-end pr-6"><%= render "shared/record_card", record: record %></div>
+                  <div class="flex justify-center"><span class="w-3 h-3 rounded-full bg-amber-900 ring-4 ring-white"></div>
+                  <div></div>
+                <% else %>
+                  <div></div>
+                  <div class="flex justify-center"><span class="w-3 h-3 rounded-full bg-amber-900 ring-4 ring-white"></div>
+                  <div class="pl-6"><%= render "shared/record_card", record: record %></div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </details>
     <% end %>
   <% end %>
 </div>

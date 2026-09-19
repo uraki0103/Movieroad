@@ -5,7 +5,7 @@
     "simplecov_version": "1.1.1",
     "command_name": "RSpec",
     "project_name": "App",
-    "timestamp": "2026-09-15T14:10:46.004+00:00",
+    "timestamp": "2026-09-19T14:29:32.358+00:00",
     "root": "/app",
     "commit": null,
     "primary_coverage": "line",
@@ -15,12 +15,12 @@
   },
   "total": {
     "lines": {
-      "covered": 150,
+      "covered": 160,
       "missed": 39,
-      "omitted": 141,
-      "total": 189,
-      "percent": 79.36507936507937,
-      "strength": 2.328042328042328
+      "omitted": 150,
+      "total": 199,
+      "percent": 80.40201005025126,
+      "strength": 3.1457286432160805
     }
   },
   "coverage": {
@@ -204,7 +204,9 @@
         "  before_action :set_record, only: %i[show edit update destroy]",
         "",
         "  def index",
-        "    @records_by_year = current_user.records.includes(:movie, :theater, :companions, memory_photos_attachments: :blob).order(watched_day: :desc).group_by { |record| record.watched_day.year }",
+        "    @records_by_year = current_user.records.includes(:movie, :theater, :companions, memory_photos_attachments: :blob)",
+        "                                            .order(watched_day: :desc)",
+        "                                            .group_by { |record| record.watched_day.year }",
         "  end",
         "",
         "  def new",
@@ -247,6 +249,11 @@
         "  def destroy",
         "    @record.destroy",
         "    redirect_to records_path, notice: \"記録を削除しました\", status: :see_other",
+        "  end",
+        "",
+        "  def search",
+        "    @q = current_user.records.ransack(params[:q])",
+        "    @records = @q.result(distinct: true).includes(:movie, :theater, :companions).order(watched_day: :desc)",
         "  end",
         "",
         "  private",
@@ -358,6 +365,8 @@
         1,
         12,
         null,
+        9,
+        null,
         null,
         1,
         6,
@@ -402,6 +411,11 @@
         null,
         null,
         1,
+        5,
+        5,
+        null,
+        null,
+        1,
         null,
         1,
         5,
@@ -474,7 +488,7 @@
         null,
         null,
         1,
-        2,
+        3,
         null,
         null,
         1,
@@ -502,11 +516,11 @@
         null,
         null
       ],
-      "lines_covered_percent": 77.10843373493977,
-      "covered_lines": 64,
+      "lines_covered_percent": 78.16091954022988,
+      "covered_lines": 68,
       "missed_lines": 19,
-      "omitted_lines": 67,
-      "total_lines": 83
+      "omitted_lines": 70,
+      "total_lines": 87
     },
     "app/controllers/top_controller.rb": {
       "source": [
@@ -671,6 +685,10 @@
         "  def self.find_or_create_for(title)",
         "    find_or_create_by(title: title)",
         "  end",
+        "",
+        "  def self.ransackable_attributes(auth_object = nil)",
+        "    %w[title]",
+        "  end",
         "end"
       ],
       "lines": [
@@ -683,13 +701,17 @@
         1,
         0,
         null,
+        null,
+        1,
+        40,
+        null,
         null
       ],
-      "lines_covered_percent": 83.33333333333333,
-      "covered_lines": 5,
+      "lines_covered_percent": 87.5,
+      "covered_lines": 7,
       "missed_lines": 1,
-      "omitted_lines": 4,
-      "total_lines": 6
+      "omitted_lines": 6,
+      "total_lines": 8
     },
     "app/models/record.rb": {
       "source": [
@@ -706,6 +728,14 @@
         "  has_many :record_companions, dependent: :destroy",
         "  has_many :companions, through: :record_companions",
         "  has_many_attached :memory_photos",
+        "",
+        "  def self.ransackable_attributes(auth_object = nil)",
+        "    %w[watched_day]",
+        "  end",
+        "",
+        "  def self.ransackable_associations(auth_object = nil)",
+        "    %w[movie]",
+        "  end",
         "",
         "  private",
         "",
@@ -733,9 +763,17 @@
         1,
         null,
         1,
+        84,
+        null,
         null,
         1,
-        24,
+        22,
+        null,
+        null,
+        1,
+        null,
+        1,
+        40,
         3,
         null,
         1,
@@ -743,10 +781,10 @@
         null
       ],
       "lines_covered_percent": 100.0,
-      "covered_lines": 17,
+      "covered_lines": 21,
       "missed_lines": 0,
-      "omitted_lines": 6,
-      "total_lines": 17
+      "omitted_lines": 10,
+      "total_lines": 21
     },
     "app/models/record_companion.rb": {
       "source": [
@@ -908,12 +946,12 @@
   "groups": {
     "Controllers": {
       "lines": {
-        "covered": 85,
+        "covered": 89,
         "missed": 30,
-        "omitted": 91,
-        "total": 115,
-        "percent": 73.91304347826087,
-        "strength": 2.0956521739130434
+        "omitted": 94,
+        "total": 119,
+        "percent": 74.78991596638656,
+        "strength": 2.2016806722689077
       },
       "files": [
         "app/controllers/application_controller.rb",
@@ -939,12 +977,12 @@
     },
     "Models": {
       "lines": {
-        "covered": 45,
+        "covered": 51,
         "missed": 1,
-        "omitted": 24,
-        "total": 46,
-        "percent": 97.82608695652173,
-        "strength": 1.5217391304347827
+        "omitted": 30,
+        "total": 52,
+        "percent": 98.07692307692308,
+        "strength": 4.519230769230769
       },
       "files": [
         "app/models/application_record.rb",

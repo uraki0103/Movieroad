@@ -1,0 +1,45 @@
+<%= link_to record_path(record), id: "record_#{record.id}", class:"group relative flex w-full gap-4 items-center bg-white border border-stone-200 rounded p-3 shadow-sm hover:shadow-md hover:border-stone-300 transition-all duration-200 overflow-hidden" do %>
+  
+  <% if record.movie.poster_url.present? %>
+    <%= image_tag record.movie.poster_url, class:"w-24 h-36 object-cover rounded-md border border-stone-200 flex-shrink-0" %>
+  <% else %>
+    <div class="w-24 h-36 bg-stone-100 rounded-md border border-stone-200 flex items-center justify-center text-stone-300 flex-shrink-0">
+      <i class="ti ti-photo text-2xl"></i>
+    </div>
+  <% end %>
+
+  <div class="text-left min-w-0">
+    <p class="text-base font-medium text-stone-900 leading-snug group-hover:text-amber-900 transition-colors">
+      <%= record.movie.title %>
+    </p>
+
+    <div class="mt-2 space-y-1 text-sm text-stone-500">
+    
+      <div class="flex items-center gap-1">
+        <i class="ti ti-star text-amber-700"></i>
+        <span><%= record.rating %></span>
+      </div>
+
+      <div class="border-t border-dashed border-stone-300 my-3"></div>
+
+      <div class="flex gap-5 text-xs text-stone-500">
+        <div>
+          <p class="text-[10px] tracking-wider text-stone-400">DATE</p>
+          <p class="font-medium text-stone-700">
+            <%= record.watched_day.strftime("%-m/%-d") %>
+          </p>
+        </div>
+
+        <% if record.theater.present? %>
+          <div class="min-w-0">
+            <p class="text-[10px] tracking-wider text-stone-400">THEATER</p>
+            <p class="font-medium text-stone-700 truncate">
+              <%= record.theater.theater_name %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+<% end %>
