@@ -5,7 +5,7 @@
     "simplecov_version": "1.1.1",
     "command_name": "RSpec",
     "project_name": "App",
-    "timestamp": "2026-09-18T10:01:16.934+00:00",
+    "timestamp": "2026-09-19T14:29:32.358+00:00",
     "root": "/app",
     "commit": null,
     "primary_coverage": "line",
@@ -15,12 +15,12 @@
   },
   "total": {
     "lines": {
-      "covered": 155,
-      "missed": 44,
+      "covered": 160,
+      "missed": 39,
       "omitted": 150,
       "total": 199,
-      "percent": 77.8894472361809,
-      "strength": 2.2311557788944723
+      "percent": 80.40201005025126,
+      "strength": 3.1457286432160805
     }
   },
   "coverage": {
@@ -363,9 +363,9 @@
         1,
         null,
         1,
-        8,
+        12,
         null,
-        4,
+        9,
         null,
         null,
         1,
@@ -411,8 +411,8 @@
         null,
         null,
         1,
-        0,
-        0,
+        5,
+        5,
         null,
         null,
         1,
@@ -488,7 +488,7 @@
         null,
         null,
         1,
-        2,
+        3,
         null,
         null,
         1,
@@ -516,9 +516,9 @@
         null,
         null
       ],
-      "lines_covered_percent": 75.86206896551724,
-      "covered_lines": 66,
-      "missed_lines": 21,
+      "lines_covered_percent": 78.16091954022988,
+      "covered_lines": 68,
+      "missed_lines": 19,
       "omitted_lines": 70,
       "total_lines": 87
     },
@@ -703,13 +703,13 @@
         null,
         null,
         1,
-        0,
+        40,
         null,
         null
       ],
-      "lines_covered_percent": 75.0,
-      "covered_lines": 6,
-      "missed_lines": 2,
+      "lines_covered_percent": 87.5,
+      "covered_lines": 7,
+      "missed_lines": 1,
       "omitted_lines": 6,
       "total_lines": 8
     },
@@ -763,26 +763,26 @@
         1,
         null,
         1,
-        0,
+        84,
         null,
         null,
         1,
-        0,
+        22,
         null,
         null,
         1,
         null,
         1,
-        24,
+        40,
         3,
         null,
         1,
         null,
         null
       ],
-      "lines_covered_percent": 90.47619047619048,
-      "covered_lines": 19,
-      "missed_lines": 2,
+      "lines_covered_percent": 100.0,
+      "covered_lines": 21,
+      "missed_lines": 0,
       "omitted_lines": 10,
       "total_lines": 21
     },
@@ -946,12 +946,12 @@
   "groups": {
     "Controllers": {
       "lines": {
-        "covered": 87,
-        "missed": 32,
+        "covered": 89,
+        "missed": 30,
         "omitted": 94,
         "total": 119,
-        "percent": 73.10924369747899,
-        "strength": 2.033613445378151
+        "percent": 74.78991596638656,
+        "strength": 2.2016806722689077
       },
       "files": [
         "app/controllers/application_controller.rb",
@@ -977,12 +977,12 @@
     },
     "Models": {
       "lines": {
-        "covered": 48,
-        "missed": 4,
+        "covered": 51,
+        "missed": 1,
         "omitted": 30,
         "total": 52,
-        "percent": 92.3076923076923,
-        "strength": 1.4038461538461537
+        "percent": 98.07692307692308,
+        "strength": 4.519230769230769
       },
       "files": [
         "app/models/application_record.rb",

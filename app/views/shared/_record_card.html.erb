@@ -1,4 +1,4 @@
-<%= link_to record_path(record), class:"group relative flex w-full gap-4 items-center bg-white border border-stone-200 rounded p-3 shadow-sm hover:shadow-md hover:border-stone-300 transition-all duration-200 overflow-hidden" do %>
+<%= link_to record_path(record), id: "record_#{record.id}", class:"group relative flex w-full gap-4 items-center bg-white border border-stone-200 rounded p-3 shadow-sm hover:shadow-md hover:border-stone-300 transition-all duration-200 overflow-hidden" do %>
   
   <% if record.movie.poster_url.present? %>
     <%= image_tag record.movie.poster_url, class:"w-24 h-36 object-cover rounded-md border border-stone-200 flex-shrink-0" %>
