@@ -3,7 +3,11 @@
     <%= link_to "Movie Road", root_path, class: "text-lg font-semibold text-stone-900" %>
     <nav class="flex items-center gap-4">
       <% if user_signed_in? %>
-        <span class="text-sm text-stone-600"><%= current_user.name %></span>
+        <%= link_to mypage_path, class: "tect-sm text-stone-600 hover:texet-stone-900" do %>
+          <i class="ti ti-user"></i>
+          <span><%= current_user.name %></span>
+          <i class="ti ti-chevron-right text-stone-400"></i>
+        <% end %>
         <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "text-sm font-medium text-white bg-amber-900 px-4 py-2 rounded-md hover:bg-amber-700 transition-colors" %>
       <% else %> 
         <%= link_to "新規登録", new_user_registration_path, class: "text-sm font-medium text-white bg-amber-900 px-4 py-2 rounded-md hover:bg-amber-700 transition-colors" %>

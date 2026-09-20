@@ -1,0 +1,33 @@
+<div class="max-w-5xl mx-auto mt-10 px-4 py-6">
+  <h1 class="text-lg font-semibold text-stone-900 mb-6">マイページ</h1>
+
+  <%= link_to edit_user_registration_path, class: "flex items-center justify-between p-4 bg-white border border-stone-200 rounded-lg mb-6 hover:bg-stone-50 transition-colors" do %>
+    <div class="flex items-center gap-3">
+      <p class="text-base font-medium text-stone-900"><%= @user.name %></p>
+      <p class="text-sm text-stone-500 mt-1">（<%= @user.email %>）</p>
+    </div>
+    <div class="flex items-center gap-1 text-sm text-stone-500">        <span>ユーザー設定</span>
+      <i class="ti ti-chevron-right text-stone-400"></i>
+    </div>
+  <% end %>
+  
+  <div class="grid gap-3 md:grid-cols-3">
+    <%= link_to "#", class: "flex flex-col items-center gap-2 p-6 bg-white border border-stone-200 rounded-lg text-stone-400 cursor-not-allowed" do %>
+      <i class="ti ti-chart-bar text-2xl"></i>
+      <span class="text-sm">サマリー</span>
+      <span class="text-xs">coming soon...</span>
+    <% end %>
+
+    <%= link_to "#", class: "flex flex-col items-center gap-2 p-6 bg-white border border-stone-200 rounded-lg text-stone-400 cursor-not-allowed" do %>
+      <i class="ti ti-award text-2xl"></i>
+      <span class="text-sm">マイルストーン</span>
+      <span class="text-xs">coming soon...</span>
+    <% end %>
+
+    <%= link_to "#", class: "flex flex-col items-center gap-2 p-6 bg-white border border-stone-200 rounded-lg text-stone-400 cursor-not-allowed" do %>
+      <i class="ti ti-tags text-2xl"></i>
+      <span class="text-sm">タグ管理</span>
+      <span class="text-xs">coming soon...</span>
+    <% end %>
+  </div>
+</div>
