@@ -4,8 +4,10 @@
   <%= form_with model: @record, url: records_path, id: "record_form" do |f| %>
     <%= render "shared/form", record: @record, f: f %>
   <% end %>
-
-  <%= render "shared/submit", label: "作成", form_id: "record_form" %>
+  
+  <div class="flex justify-center mt-8">
+    <%= render "shared/submit", label: "作成", form_id: "record_form" %>
+  </div>
 
   <%= render "shared/movie_search_modal" %>
 </div>
