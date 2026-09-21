@@ -5,7 +5,7 @@
     "simplecov_version": "1.1.1",
     "command_name": "RSpec",
     "project_name": "App",
-    "timestamp": "2026-09-20T13:04:29.821+00:00",
+    "timestamp": "2026-09-21T04:57:08.576+00:00",
     "root": "/app",
     "commit": null,
     "primary_coverage": "line",
@@ -15,12 +15,12 @@
   },
   "total": {
     "lines": {
-      "covered": 165,
+      "covered": 169,
       "missed": 39,
-      "omitted": 154,
-      "total": 204,
-      "percent": 80.88235294117646,
-      "strength": 3.093137254901961
+      "omitted": 157,
+      "total": 208,
+      "percent": 81.25,
+      "strength": 3.3076923076923075
     }
   },
   "coverage": {
@@ -68,7 +68,10 @@
         "  # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.",
         "  allow_browser versions: :modern",
         "  before_action :configure_permitted_parameters, if: :devise_controller?",
-        "",
+        "  unless Rails.env.production?",
+        "    around_action :n_plus_one_detection",
+        "  end",
+        "  ",
         "  protected",
         "",
         "  def configure_permitted_parameters",
@@ -83,6 +86,10 @@
         "  def after_sign_in_path_for(resource)",
         "    records_path",
         "  end",
+        "",
+        "  def n_plus_one_detection(&block)",
+        "    Prosopite.scan(&block)",
+        "  end",
         "end"
       ],
       "lines": [
@@ -90,6 +97,9 @@
         null,
         1,
         1,
+        1,
+        1,
+        null,
         null,
         1,
         null,
@@ -105,13 +115,17 @@
         1,
         2,
         null,
+        null,
+        1,
+        54,
+        null,
         null
       ],
-      "lines_covered_percent": 90.9090909090909,
-      "covered_lines": 10,
+      "lines_covered_percent": 93.33333333333333,
+      "covered_lines": 14,
       "missed_lines": 1,
-      "omitted_lines": 9,
-      "total_lines": 11
+      "omitted_lines": 12,
+      "total_lines": 15
     },
     "app/controllers/movie_searches_controller.rb": {
       "source": [
@@ -986,12 +1000,12 @@
   "groups": {
     "Controllers": {
       "lines": {
-        "covered": 93,
+        "covered": 97,
         "missed": 30,
-        "omitted": 97,
-        "total": 123,
-        "percent": 75.60975609756098,
-        "strength": 2.16260162601626
+        "omitted": 100,
+        "total": 127,
+        "percent": 76.37795275590551,
+        "strength": 2.543307086614173
       },
       "files": [
         "app/controllers/application_controller.rb",

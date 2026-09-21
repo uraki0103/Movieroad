@@ -57,6 +57,8 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "capybara"
   gem "selenium-webdriver"
+  gem "prosopite"
+  gem "pg_query"
 end
 
 group :development do
