@@ -2,6 +2,9 @@ class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
   before_action :configure_permitted_parameters, if: :devise_controller?
+  unless Rails.env.production?
+    around_action :n_plus_one_detection
+  end
 
   protected
 
@@ -16,5 +19,9 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     records_path
+  end
+
+  def n_plus_one_detection(&block)
+    Prosopite.scan(&block)
   end
 end
