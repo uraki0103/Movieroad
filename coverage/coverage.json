@@ -5,7 +5,7 @@
     "simplecov_version": "1.1.1",
     "command_name": "RSpec",
     "project_name": "App",
-    "timestamp": "2026-09-24T13:22:32.451+00:00",
+    "timestamp": "2026-09-25T12:37:21.555+00:00",
     "root": "/app",
     "commit": null,
     "primary_coverage": "line",
@@ -15,12 +15,12 @@
   },
   "total": {
     "lines": {
-      "covered": 198,
-      "missed": 47,
-      "omitted": 183,
-      "total": 245,
-      "percent": 80.81632653061224,
-      "strength": 3.163265306122449
+      "covered": 214,
+      "missed": 35,
+      "omitted": 188,
+      "total": 249,
+      "percent": 85.94377510040161,
+      "strength": 3.3453815261044175
     }
   },
   "coverage": {
@@ -117,7 +117,7 @@
         null,
         null,
         1,
-        55,
+        65,
         null,
         null
       ],
@@ -599,18 +599,18 @@
         "end"
       ],
       "lines": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
+        1,
+        1,
+        1,
+        3,
+        2,
+        2,
         null,
         null
       ],
-      "lines_covered_percent": 0.0,
-      "covered_lines": 0,
-      "missed_lines": 6,
+      "lines_covered_percent": 100.0,
+      "covered_lines": 6,
+      "missed_lines": 0,
       "omitted_lines": 2,
       "total_lines": 6
     },
@@ -620,25 +620,27 @@
         "  before_action :authenticate_user!",
         "  def destroy",
         "    theater = current_user.theaters.find(params[:id])",
-        "    theater.destroy",
+        "    result = theater.destroy",
+        "",
         "    redirect_to tags_path, notice: \"#{theater.theater_name}を削除しました\"",
         "  end",
         "end"
       ],
       "lines": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
+        1,
+        1,
+        1,
+        3,
+        2,
+        null,
+        2,
         null,
         null
       ],
-      "lines_covered_percent": 0.0,
-      "covered_lines": 0,
-      "missed_lines": 6,
-      "omitted_lines": 2,
+      "lines_covered_percent": 100.0,
+      "covered_lines": 6,
+      "missed_lines": 0,
+      "omitted_lines": 3,
       "total_lines": 6
     },
     "app/controllers/tags_controller.rb": {
@@ -647,8 +649,8 @@
         "  before_action :authenticate_user!",
         "",
         "  def show",
-        "    @theaters = current_user.theaters.left_joins(:records).group(:id).order(:theater_name).select(\"theaters.*, COUNT(records.id) AS records_count\")",
-        "    @companions = current_user.companions.left_joins(:records).group(:id).order(:companion_name).select(\"companions.*, COUNT(records.id) AS records_count\")",
+        "    @theaters = current_user.theaters.with_records_count.order(:theater_name)",
+        "    @companions = current_user.companions.with_records_count.order(:companion_name)",
         "  end",
         "end"
       ],
@@ -657,8 +659,8 @@
         1,
         null,
         1,
-        1,
-        1,
+        5,
+        5,
         null,
         null
       ],
@@ -873,6 +875,10 @@
         "  def self.find_or_create_all_for(user, names)",
         "    names.reject(&:blank?).uniq.map { |name| user.companions.find_or_create_by(companion_name: name) }",
         "  end",
+        "",
+        "  def self.with_records_count",
+        "    left_joins(:records).group(:id).select(\"companions.*, COUNT(records.id) AS records_count\")",
+        "  end",
         "end"
       ],
       "lines": [
@@ -886,13 +892,17 @@
         1,
         6,
         null,
+        null,
+        1,
+        6,
+        null,
         null
       ],
       "lines_covered_percent": 100.0,
-      "covered_lines": 7,
+      "covered_lines": 9,
       "missed_lines": 0,
-      "omitted_lines": 4,
-      "total_lines": 7
+      "omitted_lines": 6,
+      "total_lines": 9
     },
     "app/models/movie.rb": {
       "source": [
@@ -1019,8 +1029,8 @@
         1,
         null,
         1,
-        40,
-        3,
+        44,
+        5,
         null,
         1,
         null,
@@ -1066,6 +1076,10 @@
         "  def self.find_or_create_for(user, theater_name)",
         "    user.theaters.find_or_create_by(theater_name: theater_name)",
         "  end",
+        "",
+        "  def self.with_records_count",
+        "    left_joins(:records).group(:id).select(\"theaters.*, COUNT(records.id) AS records_count\")",
+        "  end",
         "end"
       ],
       "lines": [
@@ -1078,13 +1092,17 @@
         1,
         1,
         null,
+        null,
+        1,
+        6,
+        null,
         null
       ],
       "lines_covered_percent": 100.0,
-      "covered_lines": 6,
+      "covered_lines": 8,
       "missed_lines": 0,
-      "omitted_lines": 4,
-      "total_lines": 6
+      "omitted_lines": 6,
+      "total_lines": 8
     },
     "app/models/user.rb": {
       "source": [
@@ -1192,12 +1210,12 @@
   "groups": {
     "Controllers": {
       "lines": {
-        "covered": 116,
-        "missed": 32,
-        "omitted": 116,
+        "covered": 128,
+        "missed": 20,
+        "omitted": 117,
         "total": 148,
-        "percent": 78.37837837837837,
-        "strength": 2.581081081081081
+        "percent": 86.48648648648648,
+        "strength": 2.8378378378378377
       },
       "files": [
         "app/controllers/application_controller.rb",
@@ -1227,12 +1245,12 @@
     },
     "Models": {
       "lines": {
-        "covered": 56,
+        "covered": 60,
         "missed": 7,
-        "omitted": 36,
-        "total": 63,
-        "percent": 88.88888888888889,
-        "strength": 3.984126984126984
+        "omitted": 40,
+        "total": 67,
+        "percent": 89.55223880597015,
+        "strength": 4.044776119402985
       },
       "files": [
         "app/models/application_record.rb",
