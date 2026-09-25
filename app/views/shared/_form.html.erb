@@ -85,10 +85,10 @@
     </label>
 
     <div data-companion-picker-target="chips" class="flex flex-wrap gap-2 mb-2">
-      <% record.companions.each do |companion| %>
+      <% companion_names_to_display(record).each do |name| %>
         <span class="inline-flex items-center gap-1 bg-amber-50 text-amber-900 text-xs px-3 py-1 rounded-full">
-        <%= companion.companion_name %>
-        <input type="hidden" name="record[companion_names][]" value="<%= companion.companion_name %>">
+        <%= name %>
+        <input type="hidden" name="record[companion_names][]" value="<%= name %>">
         <button type="button" data-action="companion-picker#remove" class="ml-1 text-amber-700 hover:text-amber-900">×</button>
         </span>
       <% end %>

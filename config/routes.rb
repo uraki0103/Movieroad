@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "tags_theaters/destroy"
+  get "tags_companions/destroy"
+  get "tags/show"
+  get "mypage/show"
   devise_for :users
   resources :records, only: %i[new create index show edit update destroy] do
     collection do
@@ -7,6 +11,11 @@ Rails.application.routes.draw do
     resources :memory_photos, only: %i[destroy], controller: "record_memory_photos"
   end
   resources :movie_searches, only: %i[index]
+  resource :mypage, only: %i[show], controller: "mypage"
+  resource :tags, only: %i[show], controller: "tags" do
+    resources :theaters, only: %i[destroy], controller: "tag_theaters"
+    resources :companions, only: %i[destroy], controller: "tag_companions"
+  end
 
   root "top#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
