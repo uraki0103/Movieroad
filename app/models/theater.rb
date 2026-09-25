@@ -7,4 +7,8 @@ class Theater < ApplicationRecord
   def self.find_or_create_for(user, theater_name)
     user.theaters.find_or_create_by(theater_name: theater_name)
   end
+
+  def self.with_records_count
+    left_joins(:records).group(:id).select("theaters.*, COUNT(records.id) AS records_count")
+  end
 end

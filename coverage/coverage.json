@@ -5,7 +5,7 @@
     "simplecov_version": "1.1.1",
     "command_name": "RSpec",
     "project_name": "App",
-    "timestamp": "2026-09-23T12:40:19.245+00:00",
+    "timestamp": "2026-09-25T12:37:21.555+00:00",
     "root": "/app",
     "commit": null,
     "primary_coverage": "line",
@@ -15,12 +15,12 @@
   },
   "total": {
     "lines": {
-      "covered": 188,
+      "covered": 214,
       "missed": 35,
-      "omitted": 172,
-      "total": 223,
-      "percent": 84.30493273542601,
-      "strength": 3.381165919282511
+      "omitted": 188,
+      "total": 249,
+      "percent": 85.94377510040161,
+      "strength": 3.3453815261044175
     }
   },
   "coverage": {
@@ -117,7 +117,7 @@
         null,
         null,
         1,
-        54,
+        65,
         null,
         null
       ],
@@ -249,6 +249,9 @@
         "  end",
         "",
         "  def new",
+        "    Rails.logger.debug \"current_user = #{current_user.inspect}\"",
+        "    Rails.logger.debug \"current_user.class = #{current_user.class}\"",
+        "",
         "    @record = current_user.records.new",
         "  end",
         "",
@@ -419,6 +422,9 @@
         null,
         1,
         6,
+        6,
+        null,
+        6,
         null,
         null,
         1,
@@ -575,11 +581,94 @@
         null,
         null
       ],
-      "lines_covered_percent": 89.88764044943821,
-      "covered_lines": 80,
+      "lines_covered_percent": 90.10989010989012,
+      "covered_lines": 82,
       "missed_lines": 9,
-      "omitted_lines": 78,
-      "total_lines": 89
+      "omitted_lines": 79,
+      "total_lines": 91
+    },
+    "app/controllers/tag_companions_controller.rb": {
+      "source": [
+        "class TagCompanionsController < ApplicationController",
+        "  before_action :authenticate_user!",
+        "  def destroy",
+        "    companion = current_user.companions.find(params[:id])",
+        "    companion.destroy",
+        "    redirect_to tags_path, notice: \"#{companion.companion_name}を削除しました\"",
+        "  end",
+        "end"
+      ],
+      "lines": [
+        1,
+        1,
+        1,
+        3,
+        2,
+        2,
+        null,
+        null
+      ],
+      "lines_covered_percent": 100.0,
+      "covered_lines": 6,
+      "missed_lines": 0,
+      "omitted_lines": 2,
+      "total_lines": 6
+    },
+    "app/controllers/tag_theaters_controller.rb": {
+      "source": [
+        "class TagTheatersController < ApplicationController",
+        "  before_action :authenticate_user!",
+        "  def destroy",
+        "    theater = current_user.theaters.find(params[:id])",
+        "    result = theater.destroy",
+        "",
+        "    redirect_to tags_path, notice: \"#{theater.theater_name}を削除しました\"",
+        "  end",
+        "end"
+      ],
+      "lines": [
+        1,
+        1,
+        1,
+        3,
+        2,
+        null,
+        2,
+        null,
+        null
+      ],
+      "lines_covered_percent": 100.0,
+      "covered_lines": 6,
+      "missed_lines": 0,
+      "omitted_lines": 3,
+      "total_lines": 6
+    },
+    "app/controllers/tags_controller.rb": {
+      "source": [
+        "class TagsController < ApplicationController",
+        "  before_action :authenticate_user!",
+        "",
+        "  def show",
+        "    @theaters = current_user.theaters.with_records_count.order(:theater_name)",
+        "    @companions = current_user.companions.with_records_count.order(:companion_name)",
+        "  end",
+        "end"
+      ],
+      "lines": [
+        1,
+        1,
+        null,
+        1,
+        5,
+        5,
+        null,
+        null
+      ],
+      "lines_covered_percent": 100.0,
+      "covered_lines": 5,
+      "missed_lines": 0,
+      "omitted_lines": 3,
+      "total_lines": 5
     },
     "app/controllers/top_controller.rb": {
       "source": [
@@ -668,6 +757,51 @@
       "omitted_lines": 2,
       "total_lines": 3
     },
+    "app/helpers/tags_companions_helper.rb": {
+      "source": [
+        "module TagsCompanionsHelper",
+        "end"
+      ],
+      "lines": [
+        1,
+        null
+      ],
+      "lines_covered_percent": 100.0,
+      "covered_lines": 1,
+      "missed_lines": 0,
+      "omitted_lines": 1,
+      "total_lines": 1
+    },
+    "app/helpers/tags_helper.rb": {
+      "source": [
+        "module TagsHelper",
+        "end"
+      ],
+      "lines": [
+        1,
+        null
+      ],
+      "lines_covered_percent": 100.0,
+      "covered_lines": 1,
+      "missed_lines": 0,
+      "omitted_lines": 1,
+      "total_lines": 1
+    },
+    "app/helpers/tags_theaters_helper.rb": {
+      "source": [
+        "module TagsTheatersHelper",
+        "end"
+      ],
+      "lines": [
+        1,
+        null
+      ],
+      "lines_covered_percent": 100.0,
+      "covered_lines": 1,
+      "missed_lines": 0,
+      "omitted_lines": 1,
+      "total_lines": 1
+    },
     "app/jobs/application_job.rb": {
       "source": [
         "class ApplicationJob < ActiveJob::Base",
@@ -741,6 +875,10 @@
         "  def self.find_or_create_all_for(user, names)",
         "    names.reject(&:blank?).uniq.map { |name| user.companions.find_or_create_by(companion_name: name) }",
         "  end",
+        "",
+        "  def self.with_records_count",
+        "    left_joins(:records).group(:id).select(\"companions.*, COUNT(records.id) AS records_count\")",
+        "  end",
         "end"
       ],
       "lines": [
@@ -754,13 +892,17 @@
         1,
         6,
         null,
+        null,
+        1,
+        6,
+        null,
         null
       ],
       "lines_covered_percent": 100.0,
-      "covered_lines": 7,
+      "covered_lines": 9,
       "missed_lines": 0,
-      "omitted_lines": 4,
-      "total_lines": 7
+      "omitted_lines": 6,
+      "total_lines": 9
     },
     "app/models/movie.rb": {
       "source": [
@@ -887,8 +1029,8 @@
         1,
         null,
         1,
-        40,
-        3,
+        44,
+        5,
         null,
         1,
         null,
@@ -934,6 +1076,10 @@
         "  def self.find_or_create_for(user, theater_name)",
         "    user.theaters.find_or_create_by(theater_name: theater_name)",
         "  end",
+        "",
+        "  def self.with_records_count",
+        "    left_joins(:records).group(:id).select(\"theaters.*, COUNT(records.id) AS records_count\")",
+        "  end",
         "end"
       ],
       "lines": [
@@ -946,13 +1092,17 @@
         1,
         1,
         null,
+        null,
+        1,
+        6,
+        null,
         null
       ],
       "lines_covered_percent": 100.0,
-      "covered_lines": 6,
+      "covered_lines": 8,
       "missed_lines": 0,
-      "omitted_lines": 4,
-      "total_lines": 6
+      "omitted_lines": 6,
+      "total_lines": 8
     },
     "app/models/user.rb": {
       "source": [
@@ -1060,12 +1210,12 @@
   "groups": {
     "Controllers": {
       "lines": {
-        "covered": 109,
+        "covered": 128,
         "missed": 20,
-        "omitted": 108,
-        "total": 129,
-        "percent": 84.49612403100775,
-        "strength": 2.8217054263565893
+        "omitted": 117,
+        "total": 148,
+        "percent": 86.48648648648648,
+        "strength": 2.8378378378378377
       },
       "files": [
         "app/controllers/application_controller.rb",
@@ -1073,6 +1223,9 @@
         "app/controllers/mypage_controller.rb",
         "app/controllers/record_memory_photos_controller.rb",
         "app/controllers/records_controller.rb",
+        "app/controllers/tag_companions_controller.rb",
+        "app/controllers/tag_theaters_controller.rb",
+        "app/controllers/tags_controller.rb",
         "app/controllers/top_controller.rb"
       ]
     },
@@ -1092,12 +1245,12 @@
     },
     "Models": {
       "lines": {
-        "covered": 56,
+        "covered": 60,
         "missed": 7,
-        "omitted": 36,
-        "total": 63,
-        "percent": 88.88888888888889,
-        "strength": 3.984126984126984
+        "omitted": 40,
+        "total": 67,
+        "percent": 89.55223880597015,
+        "strength": 4.044776119402985
       },
       "files": [
         "app/models/application_record.rb",
@@ -1124,18 +1277,21 @@
     },
     "Helpers": {
       "lines": {
-        "covered": 6,
+        "covered": 9,
         "missed": 0,
-        "omitted": 5,
-        "total": 6,
+        "omitted": 8,
+        "total": 9,
         "percent": 100.0,
-        "strength": 2.1666666666666665
+        "strength": 1.7777777777777777
       },
       "files": [
         "app/helpers/application_helper.rb",
         "app/helpers/mypage_helper.rb",
         "app/helpers/record_memory_photos_helper.rb",
-        "app/helpers/records_helper.rb"
+        "app/helpers/records_helper.rb",
+        "app/helpers/tags_companions_helper.rb",
+        "app/helpers/tags_helper.rb",
+        "app/helpers/tags_theaters_helper.rb"
       ]
     },
     "Jobs": {

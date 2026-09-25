@@ -27,4 +27,15 @@ RSpec.describe Theater, type: :model do
 
     expect(record.reload.theater_id).to be_nil
   end
+
+  describe "with_record_count" do
+    it "劇場ごとの記録件数が集計できる" do
+      user = create(:user)
+      theater = create(:theater, user: user)
+      create_list(:record, 2, user: user, theater: theater)
+
+      result = user.theaters.with_records_count.find(theater.id)
+      expect(result.records_count).to eq(2)
+    end
+  end
 end

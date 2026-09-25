@@ -9,6 +9,9 @@ class RecordsController < ApplicationController
   end
 
   def new
+    Rails.logger.debug "current_user = #{current_user.inspect}"
+    Rails.logger.debug "current_user.class = #{current_user.class}"
+
     @record = current_user.records.new
   end
 
