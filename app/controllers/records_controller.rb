@@ -9,9 +9,6 @@ class RecordsController < ApplicationController
   end
 
   def new
-    Rails.logger.debug "current_user = #{current_user.inspect}"
-    Rails.logger.debug "current_user.class = #{current_user.class}"
-
     @record = current_user.records.new
   end
 
@@ -92,12 +89,16 @@ class RecordsController < ApplicationController
       return
     end
 
-    movie = Movie.find_or_create_for(
-      title: movie_title_param,
-      tmdb_id: tmdb_id_param,
-      release_year: release_year_param,
-      poster_url: poster_url_param
-    )
+    if record.persisted? && record.movie.title != movie_title_param
+      movie = Movie.find_or_create_for(title: movie_title_param)
+    else
+      movie = Movie.find_or_create_for(
+        title: movie_title_param,
+        tmdb_id: tmdb_id_param,
+        release_year: release_year_param,
+        poster_url: poster_url_param
+      )
+    end
 
     if movie.persisted?
       record.movie = movie
